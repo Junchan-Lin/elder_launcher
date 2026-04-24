@@ -16,7 +16,7 @@ Future EditDialog(BuildContext context, EditMode editMode) {
       title: Text(
         S.of(context).dlgEditTitle,
         style: TextStyles.dialogTitle.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       actions: [

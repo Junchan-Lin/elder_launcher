@@ -11,8 +11,8 @@ class FavGridView extends StatelessWidget {
   const FavGridView(
     this.favItems,
     this.itemOnClickAction, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,11 @@ class FavGridView extends StatelessWidget {
 
 class FavItemCard extends StatelessWidget {
   const FavItemCard({
-    Key? key,
+    super.key,
     required this.item,
     required this.itemOnClickAction,
     required this.itemName,
-  }) : super(key: key);
+  });
 
   final Item item;
   final VoidItemFunction itemOnClickAction;

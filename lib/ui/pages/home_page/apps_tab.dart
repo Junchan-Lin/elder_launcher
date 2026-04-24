@@ -13,8 +13,8 @@ import '../../common/action_panel.dart';
 
 class AppsTab extends StatelessWidget {
   const AppsTab({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

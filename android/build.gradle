@@ -1,29 +1,45 @@
-buildscript {
-    ext.kotlin_version = '1.6.10'
-    repositories {
-        google()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-    project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+// 核心修復腳本：解決舊插件 (contacts_service, device_apps) 與 AGP 8.7+ 的相容性衝突
+subprojects {
+    afterEvaluate { project ->
+        if (project.extensions.findByName('android') != null) {
+            // 1. 強制設定 Namespace
+            if (project.android.namespace == null) {
+                project.android.namespace = "xyz.arjunsinh.${project.name.replace("-", "_")}"
+            }
+            
+            // 2. 動態修復 Manifest (解決 Incorrect package 錯誤)
+            // 為了不修改 pub-cache 原始檔案，我們產生一個暫存的修復版 Manifest
+            if (project.name == 'contacts_service' || project.name == 'device_apps') {
+                def manifestFile = project.file("src/main/AndroidManifest.xml")
+                if (manifestFile.exists()) {
+                    def patchedManifestDir = new File(project.buildDir, "patched-manifest")
+                    patchedManifestDir.mkdirs()
+                    def patchedManifest = new File(patchedManifestDir, "AndroidManifest.xml")
+                    
+                    // 移除引發錯誤的 package="..." 屬性
+                    def content = manifestFile.text.replaceAll(/package="[^"]*"/, '')
+                    patchedManifest.text = content
+                    
+                    // 強迫 Gradle 使用我們產生的修復版 Manifest
+                    project.android.sourceSets.main.manifest.srcFile patchedManifest.absolutePath
+                }
+            }
+        }
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
 }

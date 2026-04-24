@@ -10,11 +10,11 @@ import '../../../ui/pages/home_page/edit_dialog.dart';
 import '../../../ui/theme.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var _appBarTextSizeGroup = AutoSizeGroup();
+    var appBarTextSizeGroup = AutoSizeGroup();
 
     void openEditDialog(int tabIndex) {
       EditMode editMode;
@@ -28,12 +28,12 @@ class HomePage extends StatelessWidget {
       EditDialog(context, editMode);
     }
 
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
+    return PopScope(
+      canPop: false,
       child: ChangeNotifierProvider(
         create: (_) => DateTimeProvider(),
         child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
             actions: <Widget>[
               Padding(
@@ -41,10 +41,8 @@ class HomePage extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    if (DefaultTabController.of(context) != null) {
-                      openEditDialog(DefaultTabController.of(context)!.index);
-                    }
-                  },
+                    openEditDialog(DefaultTabController.of(context).index);
+                                    },
                 ),
               ),
             ],
@@ -63,7 +61,7 @@ class HomePage extends StatelessWidget {
                   Consumer<DateTimeProvider>(
                     builder: (_, dateTimeProvider, __) => AutoSizeText(
                       dateTimeProvider.date,
-                      group: _appBarTextSizeGroup,
+                      group: appBarTextSizeGroup,
                       maxLines: 1,
                       style: TextStyles.headerDate,
                     ),
@@ -81,7 +79,7 @@ class HomePage extends StatelessWidget {
                             Flexible(
                               child: AutoSizeText(
                                 S.of(context).Apps,
-                                group: _appBarTextSizeGroup,
+                                group: appBarTextSizeGroup,
                                 maxLines: 1,
                                 style: const TextStyle(fontSize: 50),
                               ),
@@ -102,7 +100,7 @@ class HomePage extends StatelessWidget {
                             Flexible(
                               child: AutoSizeText(
                                 S.of(context).Contacts,
-                                group: _appBarTextSizeGroup,
+                                group: appBarTextSizeGroup,
                                 maxLines: 1,
                                 style: const TextStyle(fontSize: 50),
                               ),

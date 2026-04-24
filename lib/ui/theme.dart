@@ -5,7 +5,6 @@ import 'colors.dart';
 /* Light Themes */
 ThemeData baseLightTheme = ThemeData.from(
     colorScheme: const ColorScheme.light(
-      background: youCard,
       secondary: youBlue,
       surface: elderBlueGrey,
     ),
@@ -25,7 +24,6 @@ ThemeData tealTheme = baseLightTheme.copyWith(
 /* Dark Themes */
 ThemeData baseDarkTheme = ThemeData.from(
     colorScheme: const ColorScheme.dark(
-      background: youBlackDim,
       primary: youBlack,
       secondary: youBlue,
       surface: elderDarkGrey,
@@ -33,7 +31,7 @@ ThemeData baseDarkTheme = ThemeData.from(
     textTheme: Typography.whiteMountainView);
 
 ThemeData darkTheme = baseDarkTheme.copyWith(
-  appBarTheme: const AppBarTheme(color: youBlack),
+  appBarTheme: const AppBarTheme(backgroundColor: youBlack),
   cupertinoOverrideTheme: const CupertinoThemeData(
     primaryColor: elderWhite,
   ),

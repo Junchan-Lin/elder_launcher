@@ -11,24 +11,21 @@ class InfoActionWidget extends StatelessWidget {
 
   const InfoActionWidget(
       this.message, this.buttonLabel, this.buttonIcon, this.buttonOnClickAction,
-      {Key? key})
-      : super(key: key);
+      {super.key});
 
   const InfoActionWidget.add(
       {required this.message,
       required this.buttonLabel,
       required this.buttonOnClickAction,
-      Key? key})
-      : buttonIcon = Icons.add,
-        super(key: key);
+      super.key})
+      : buttonIcon = Icons.add;
 
   const InfoActionWidget.close(
       {required this.message,
       required this.buttonLabel,
       required this.buttonOnClickAction,
-      Key? key})
-      : buttonIcon = Icons.close,
-        super(key: key);
+      super.key})
+      : buttonIcon = Icons.close;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +46,7 @@ class InfoActionWidget extends StatelessWidget {
             ElevatedButton(
                 onPressed: buttonOnClickAction,
                 style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

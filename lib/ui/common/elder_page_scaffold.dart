@@ -9,8 +9,7 @@ class ElderPageScaffold extends StatelessWidget {
       {required this.title,
       required this.body,
       this.floatingActionButton,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   final Widget body;
   final String title;
@@ -41,7 +40,7 @@ class ElderPageScaffold extends StatelessWidget {
                 topRight: Radius.circular(20),
               ),
               child: Container(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.surface,
                 child: body,
               ),
             ),

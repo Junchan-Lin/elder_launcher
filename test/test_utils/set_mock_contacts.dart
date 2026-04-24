@@ -13,13 +13,14 @@ void setMockContacts() {
       MethodChannel('github.com/clovisnicolas/flutter_contacts');
   final allContacts = fakeDeviceContacts;
 
-  TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(contactsChannel, (call) async {
     if (call.method == 'getContacts') {
       //print(call.arguments);
       //print("Returning");
       return allContacts;
     }
+    return null;
 
     /*if (call.method == 'getApp') {
       return allContacts.firstWhereOrNull(

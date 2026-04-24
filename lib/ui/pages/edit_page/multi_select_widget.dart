@@ -6,22 +6,21 @@ class MultiSelectWidget extends StatelessWidget {
   final EditService editService;
   final bool showId;
 
-  const MultiSelectWidget(this.editService, {Key? key, required this.showId})
-      : super(key: key);
+  const MultiSelectWidget(this.editService, {super.key, required this.showId});
 
   @override
   Widget build(BuildContext context) {
-    final _allItems = editService.sortedItems;
+    final allItems = editService.sortedItems;
 
     void toggleFav(int position) {
       editService.toggleFav(position);
     }
 
     return ListView.separated(
-      itemCount: _allItems.length,
+      itemCount: allItems.length,
       padding: const EdgeInsets.symmetric(vertical: 6),
       itemBuilder: (context, position) {
-        var item = _allItems[position];
+        var item = allItems[position];
         var isFav = editService.isFav(position);
 
         return CheckboxListTile(

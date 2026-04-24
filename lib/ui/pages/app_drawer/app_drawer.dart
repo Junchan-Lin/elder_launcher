@@ -9,7 +9,7 @@ import '../../../ui/theme.dart';
 import '../../common/elder_page_scaffold.dart';
 
 class AppDrawerScreen extends StatelessWidget {
-  const AppDrawerScreen({Key? key}) : super(key: key);
+  const AppDrawerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class AppDrawerScreen extends StatelessWidget {
         if (appService.isAppListLoaded && appService.allApps.isNotEmpty) {
           return AppDrawer(appService.allApps, launchApp);
         } else {
-          return Flex(
+          return const Flex(
             direction: Axis.vertical,
-            children: const [
+            children: [
               LoadingWidget(),
             ],
           );
@@ -41,8 +41,8 @@ class AppDrawer extends StatelessWidget {
   const AppDrawer(
     this.allItems,
     this.itemOnClickAction, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final List<Item> allItems;
   final VoidStringFunction itemOnClickAction;

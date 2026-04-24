@@ -30,7 +30,7 @@ class ContactRepository implements DataRepository {
 
   // TODO: Performance optimization
   List<item.Item> _toDistinctItems(Iterable<Contact> contacts) {
-    var _contacts = <item.Item>{};
+    var contacts0 = <item.Item>{};
 
     for (var contact in contacts) {
       var numbers = <String>{};
@@ -50,17 +50,17 @@ class ContactRepository implements DataRepository {
 
       for (var number in numbers) {
         if (contact.displayName != null) {
-          _contacts.add(
+          contacts0.add(
             item.Item(number, contact.displayName!, contact.avatar),
           );
         } else {
-          _contacts.add(
+          contacts0.add(
             item.Item(number, number, contact.avatar),
           );
         }
       }
     }
-    return _contacts.toList();
+    return contacts0.toList();
   }
 
   item.Item _toItem(String number, Iterable<Contact> contacts) {

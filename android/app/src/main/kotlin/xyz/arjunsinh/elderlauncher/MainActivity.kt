@@ -11,27 +11,30 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugins.GeneratedPluginRegistrant
 
-class MainActivity : FlutterActivity() {
+class MainActivity: FlutterActivity() {
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
+        super.configureFlutterEngine(flutterEngine)
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_CONTACTS).setMethodCallHandler { call, result ->
             when (call.method) {
                 "hasTelephoneFeature" -> result.success(hasTelephoneFeature())
                 "launchContactsApp" -> openContactsApp()
                 "launchDialerWithNumber" -> {
-                    if (call.hasArgument("number")) {
-                        val number = call.argument<String>("number")!!
+                    val number = call.argument<String>("number")
+                    if (number != null) {
                         openDialerWithNumber(number)
+                    } else {
+                        result.error("ARGUMENT_ERROR", "Number is null", null)
                     }
                 }
                 "startPhoneCall" -> {
-                    if (call.hasArgument("number")) {
-                        val number = call.argument<String>("number")!!
+                    val number = call.argument<String>("number")
+                    if (number != null) {
                         startPhoneCall(number)
+                    } else {
+                        result.error("ARGUMENT_ERROR", "Number is null", null)
                     }
                 }
                 else -> result.notImplemented()
@@ -48,51 +51,46 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    /*
-    ** Contacts & Phone
-    */
-
     private fun hasTelephoneFeature(): Boolean {
-        val pm = applicationContext.packageManager;
-        return pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
+        return packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
     }
 
-    // TODO: Fix Contacts App opening twice.
     private fun openContactsApp() {
-        val intent = Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        if (intent != null) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun openDialerWithNumber(number: String) {
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:$number")
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        if (intent != null) {
+        try {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$number")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun startPhoneCall(number: String) {
-        val intent = Intent(Intent.ACTION_CALL)
-        intent.data = Uri.parse("tel:$number")
-        if (intent != null) {
+        try {
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$number")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
-    /*
-    ** Core
-    */
-
     private fun canSetDefaultLauncher(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val roleManager = getSystemService(RoleManager::class.java)
-            val roleAvailable = roleManager.isRoleAvailable(RoleManager.ROLE_HOME)
-            val roleHeld = roleManager.isRoleHeld(RoleManager.ROLE_HOME)
-            roleAvailable && !roleHeld
+            val roleManager = getSystemService(Context.ROLE_SERVICE) as RoleManager?
+            roleManager?.isRoleAvailable(RoleManager.ROLE_HOME) == true && !roleManager.isRoleHeld(RoleManager.ROLE_HOME)
         } else {
             false
         }
@@ -100,17 +98,16 @@ class MainActivity : FlutterActivity() {
 
     private fun getDeprecatedFavAppIds(): List<String> {
         val sharedPrefs = applicationContext.getSharedPreferences("key_apps", Context.MODE_PRIVATE)
-        var deprecatedFavAppIds = sharedPrefs.getStringSet("key_favorites", emptySet<String>())
-        return deprecatedFavAppIds!!.toList()
+        val deprecatedFavAppIds = sharedPrefs.getStringSet("key_favorites", emptySet<String>())
+        return deprecatedFavAppIds?.toList() ?: emptyList()
     }
 
     private fun setDefaultLauncher() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val roleManager = getSystemService(RoleManager::class.java)
-            val roleHeld = roleManager.isRoleHeld(RoleManager.ROLE_HOME)
-            if (!roleHeld) {
+            val roleManager = getSystemService(Context.ROLE_SERVICE) as RoleManager?
+            if (roleManager != null && !roleManager.isRoleHeld(RoleManager.ROLE_HOME)) {
                 val roleRequestIntent = roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME)
-                startActivityForResult(roleRequestIntent, DEFAULT_LAUNCHER_INTENT_REQUEST_CODE) // Creates new instance of main activity if successful
+                startActivityForResult(roleRequestIntent, DEFAULT_LAUNCHER_INTENT_REQUEST_CODE)
             }
         }
     }
@@ -119,7 +116,9 @@ class MainActivity : FlutterActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == DEFAULT_LAUNCHER_INTENT_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
-                MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, CHANNEL_CORE)?.invokeMethod("setDefaultLauncherFailure", null)
+                flutterEngine?.dartExecutor?.binaryMessenger?.let {
+                    MethodChannel(it, CHANNEL_CORE).invokeMethod("setDefaultLauncherFailure", null)
+                }
             }
         }
     }

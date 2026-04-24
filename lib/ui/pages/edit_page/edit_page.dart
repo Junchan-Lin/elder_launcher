@@ -12,7 +12,7 @@ import '../../../ui/theme.dart';
 import '../../common/elder_page_scaffold.dart';
 
 class EditPage extends StatelessWidget {
-  const EditPage(this.editMode, {Key? key}) : super(key: key);
+  const EditPage(this.editMode, {super.key});
 
   final EditMode editMode;
 

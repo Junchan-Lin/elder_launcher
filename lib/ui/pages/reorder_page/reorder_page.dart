@@ -12,18 +12,18 @@ import '../../../ui/theme.dart';
 import '../../common/elder_page_scaffold.dart';
 
 class ReorderPage extends StatelessWidget {
-  const ReorderPage(this.editMode, {Key? key}) : super(key: key);
+  const ReorderPage(this.editMode, {super.key});
 
   final EditMode editMode;
 
   @override
   Widget build(BuildContext context) {
-    var _favItems = <Item>[];
+    var favItems = <Item>[];
 
     if (editMode == EditMode.apps) {
-      _favItems = context.read<AppProvider>().favApps;
+      favItems = context.read<AppProvider>().favApps;
     } else {
-      _favItems = context.read<ContactProvider>().favContacts;
+      favItems = context.read<ContactProvider>().favContacts;
     }
 
     void backToHome() {
@@ -39,7 +39,7 @@ class ReorderPage extends StatelessWidget {
     }
 
     return ChangeNotifierProvider(
-      create: (_) => EditService(favItems: _favItems),
+      create: (_) => EditService(favItems: favItems),
       child: ElderPageScaffold(
         title: editMode == EditMode.apps
             ? S.of(context).dlgAppsReorder

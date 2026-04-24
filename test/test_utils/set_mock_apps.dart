@@ -12,7 +12,7 @@ void setMockApps() {
   const deviceAppsChannel = MethodChannel('g123k/device_apps');
   final allApps = fakeInstalledApps;
 
-  TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(deviceAppsChannel, (call) async {
     if (call.method == 'getInstalledApps') {
       return allApps;
@@ -22,5 +22,6 @@ void setMockApps() {
       return allApps.firstWhereOrNull(
           (app) => app['package_name'] == call.arguments['package_name']);
     }
+    return null;
   });
 }

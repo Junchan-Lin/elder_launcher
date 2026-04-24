@@ -3,8 +3,7 @@ import '../colors.dart';
 import '../theme.dart';
 
 class ActionPanel extends StatefulWidget {
-  const ActionPanel({Key? key, required this.heading, required this.body})
-      : super(key: key);
+  const ActionPanel({super.key, required this.heading, required this.body});
 
   final String heading;
   final Widget body;

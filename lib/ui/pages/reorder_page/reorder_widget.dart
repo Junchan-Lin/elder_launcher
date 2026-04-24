@@ -7,12 +7,11 @@ class ReorderWidget extends StatelessWidget {
   final EditService editService;
   final bool showId;
 
-  const ReorderWidget(this.editService, {Key? key, required this.showId})
-      : super(key: key);
+  const ReorderWidget(this.editService, {super.key, required this.showId});
 
   @override
   Widget build(BuildContext context) {
-    final _favItems = editService.sortedItems;
+    final favItems = editService.sortedItems;
 
     void reorderItems(int oldIndex, int newIndex) {
       editService.reorderFavItems(oldIndex, newIndex);
@@ -21,7 +20,7 @@ class ReorderWidget extends StatelessWidget {
     return ReorderableListView(
       onReorder: reorderItems,
       padding: const EdgeInsets.all(6),
-      children: _favItems
+      children: favItems
           .map((item) => ReorderableCard(
                 item: item,
                 key: Key(item.id),
@@ -33,9 +32,9 @@ class ReorderWidget extends StatelessWidget {
 
 class ReorderableCard extends StatelessWidget {
   const ReorderableCard({
-    Key? key,
+    super.key,
     required this.item,
-  }) : super(key: key);
+  });
 
   final Item item;
 

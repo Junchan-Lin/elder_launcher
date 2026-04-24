@@ -14,13 +14,13 @@ Future CallDialog(BuildContext context, Item contact) {
       title: Text(
         contact.name,
         style: TextStyles.dialogTitle.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       message: Text(
         contact.id,
         style: TextStyles.dialogSubtitle.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       actions: [

@@ -14,8 +14,8 @@ import '../../common/action_panel.dart';
 
 class ContactsTab extends StatelessWidget {
   const ContactsTab({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

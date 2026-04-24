@@ -8,11 +8,9 @@ class FatButton extends StatelessWidget {
   final IconData icon;
   final VoidFunction onClickAction;
 
-  const FatButton(this.label, this.icon, this.onClickAction, {Key? key})
-      : super(key: key);
-  const FatButton.next(this.label, this.onClickAction, {Key? key})
-      : icon = Icons.navigate_next,
-        super(key: key);
+  const FatButton(this.label, this.icon, this.onClickAction, {super.key});
+  const FatButton.next(this.label, this.onClickAction, {super.key})
+      : icon = Icons.navigate_next;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +40,7 @@ class PrimaryButton extends StatelessWidget {
   final String label;
   final VoidFunction onClickAction;
 
-  const PrimaryButton(this.label, this.onClickAction, {Key? key})
-      : super(key: key);
+  const PrimaryButton(this.label, this.onClickAction, {super.key});
 
   @override
   Widget build(BuildContext context) {

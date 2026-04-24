@@ -34,10 +34,10 @@ class AppRepository implements DataRepository {
   }
 
   Future<List<Item>> _toItems(List<Application> apps) async {
-    var _apps = <Item>[];
+    var apps0 = <Item>[];
 
     for (final app in apps) {
-      _apps.add(
+      apps0.add(
         Item(
             app.packageName,
             app.appName,
@@ -47,7 +47,7 @@ class AppRepository implements DataRepository {
       );
     }
 
-    return _apps;
+    return apps0;
   }
 
   // TODO: Sort Apps as per locale and pronounciation
