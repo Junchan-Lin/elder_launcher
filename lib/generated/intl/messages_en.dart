@@ -22,44 +22,67 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Apps": MessageLookupByLibrary.simpleMessage("Apps"),
-        "Contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
-        "btnAddFavApps":
-            MessageLookupByLibrary.simpleMessage("Add Favourite Apps"),
-        "btnAddFavContacts":
-            MessageLookupByLibrary.simpleMessage("Add Favourite Contacts"),
-        "btnAllApps": MessageLookupByLibrary.simpleMessage("All Apps"),
-        "btnAllContacts": MessageLookupByLibrary.simpleMessage("All Contacts"),
-        "btnBackToHome": MessageLookupByLibrary.simpleMessage("Back to Home"),
-        "btnGrantPermission":
-            MessageLookupByLibrary.simpleMessage("Grant Permission"),
-        "btnSetDefaultLauncher":
-            MessageLookupByLibrary.simpleMessage("Set as Default"),
-        "dlgAppsAddRemove":
-            MessageLookupByLibrary.simpleMessage("Add/Remove Apps"),
-        "dlgAppsReload":
-            MessageLookupByLibrary.simpleMessage("Reload App List"),
-        "dlgAppsReorder": MessageLookupByLibrary.simpleMessage("Reorder Apps"),
-        "dlgCall": MessageLookupByLibrary.simpleMessage("Call"),
-        "dlgCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "dlgContactsAddRemove":
-            MessageLookupByLibrary.simpleMessage("Add/Remove Contacts"),
-        "dlgContactsReload":
-            MessageLookupByLibrary.simpleMessage("Reload Contacts"),
-        "dlgContactsReorder":
-            MessageLookupByLibrary.simpleMessage("Reorder Contacts"),
-        "dlgEditTitle": MessageLookupByLibrary.simpleMessage("Edit Favourites"),
-        "dlgOpenSettings":
-            MessageLookupByLibrary.simpleMessage("Open Settings"),
-        "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
-            "To add favourite contacts to this screen, allow this app access to your contacts."),
-        "msgNoData": MessageLookupByLibrary.simpleMessage(
-            "No data available. Try again in a few seconds."),
-        "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
-            "You haven\'t added any favourites"),
-        "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
-            "To make calling easier, allow this app to start phone calls for you."),
-        "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
-            "Open apps and contacts faster by making Elder Launcher the home app.")
-      };
+    "Apps": MessageLookupByLibrary.simpleMessage("Apps"),
+    "Contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
+    "Line": MessageLookupByLibrary.simpleMessage("Line"),
+    "btnAdd": MessageLookupByLibrary.simpleMessage("Add"),
+    "btnAddFavApps": MessageLookupByLibrary.simpleMessage("Add Favourite Apps"),
+    "btnAddFavContacts": MessageLookupByLibrary.simpleMessage(
+      "Add Favourite Contacts",
+    ),
+    "btnAddFavLine": MessageLookupByLibrary.simpleMessage("Add Line Contact"),
+    "btnAllApps": MessageLookupByLibrary.simpleMessage("All Apps"),
+    "btnAllContacts": MessageLookupByLibrary.simpleMessage("All Contacts"),
+    "btnBackToHome": MessageLookupByLibrary.simpleMessage("Back to Home"),
+    "btnCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "btnGrantPermission": MessageLookupByLibrary.simpleMessage(
+      "Grant Permission",
+    ),
+    "btnSetDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "Set as Default",
+    ),
+    "dlgAddLineTitle": MessageLookupByLibrary.simpleMessage("Add Line Contact"),
+    "dlgAppsAddRemove": MessageLookupByLibrary.simpleMessage("Add/Remove Apps"),
+    "dlgAppsReload": MessageLookupByLibrary.simpleMessage("Reload App List"),
+    "dlgAppsReorder": MessageLookupByLibrary.simpleMessage("Reorder Apps"),
+    "dlgCall": MessageLookupByLibrary.simpleMessage("Call"),
+    "dlgCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "dlgContactsAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Add/Remove Contacts",
+    ),
+    "dlgContactsReload": MessageLookupByLibrary.simpleMessage(
+      "Reload Contacts",
+    ),
+    "dlgContactsReorder": MessageLookupByLibrary.simpleMessage(
+      "Reorder Contacts",
+    ),
+    "dlgEditTitle": MessageLookupByLibrary.simpleMessage("Edit Favourites"),
+    "dlgLineAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Add/Remove Line Contacts",
+    ),
+    "dlgLineReorder": MessageLookupByLibrary.simpleMessage(
+      "Reorder Line Contacts",
+    ),
+    "dlgOpenSettings": MessageLookupByLibrary.simpleMessage("Open Settings"),
+    "hintLineId": MessageLookupByLibrary.simpleMessage("Line ID"),
+    "hintLineName": MessageLookupByLibrary.simpleMessage("Name"),
+    "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
+      "To add favourite contacts to this screen, allow this app access to your contacts.",
+    ),
+    "msgNoData": MessageLookupByLibrary.simpleMessage(
+      "No data available. Try again in a few seconds.",
+    ),
+    "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
+      "You haven\'t added any favourites",
+    ),
+    "msgNoLineId": MessageLookupByLibrary.simpleMessage(
+      "Please enter a Line ID",
+    ),
+    "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
+      "To make calling easier, allow this app to start phone calls for you.",
+    ),
+    "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "Open apps and contacts faster by making Elder Launcher the home app.",
+    ),
+  };
 }

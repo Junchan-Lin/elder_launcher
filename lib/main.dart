@@ -1,3 +1,5 @@
+import 'package:elder_launcher/data_sources/line_repository.dart';
+import 'package:elder_launcher/providers/line_provider.dart';
 import 'package:elder_launcher/data_sources/app_repository.dart';
 import 'package:elder_launcher/data_sources/contact_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +25,12 @@ class MyApp extends StatelessWidget {
             create: (_) => AppProvider(AppRepository())),
         ChangeNotifierProvider<ContactProvider>(
             create: (_) => ContactProvider(ContactRepository())),
+        ChangeNotifierProvider<LineProvider>(
+            create: (_) => LineProvider(LineRepository())),
       ],
       child: MaterialApp(
         title: 'Elder Launcher',
-        home: const DefaultTabController(length: 2, child: HomePage()),
+        home: const DefaultTabController(length: 3, child: HomePage()),
         onGenerateRoute: generateRoute,
         localizationsDelegates: const [
           S.delegate,

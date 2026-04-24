@@ -1,3 +1,4 @@
+import '../../../utils/item_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../services/edit_service.dart';
 import '../../../ui/theme.dart';
@@ -31,7 +32,7 @@ class MultiSelectWidget extends StatelessWidget {
           ),
           subtitle: showId
               ? Text(
-                  item.id,
+                  formatItemId(item.id),
                   style: TextStyles.listTitle,
                 )
               : null,

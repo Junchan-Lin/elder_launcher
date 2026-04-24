@@ -1,3 +1,4 @@
+import 'package:elder_launcher/ui/pages/home_page/line_tab.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +22,10 @@ class HomePage extends StatelessWidget {
 
       if (tabIndex == 0) {
         editMode = EditMode.apps;
-      } else {
+      } else if (tabIndex == 1) {
         editMode = EditMode.contacts;
+      } else {
+        editMode = EditMode.line;
       }
 
       EditDialog(context, editMode);
@@ -109,12 +112,34 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Tab(
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),
+                              child: Icon(Icons.message),
+                            ),
+                            Flexible(
+                              child: AutoSizeText(
+                                S.of(context).Line,
+                                group: appBarTextSizeGroup,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 50),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ]),
                 ],
               ),
             ),
           ),
-          body: const TabBarView(children: <Widget>[AppsTab(), ContactsTab()]),
+          body: const TabBarView(
+              children: <Widget>[AppsTab(), ContactsTab(), LineTab()]),
         ),
       ),
     );

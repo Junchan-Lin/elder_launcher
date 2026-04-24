@@ -1,3 +1,4 @@
+import 'package:elder_launcher/providers/line_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/edit_mode.dart';
@@ -24,9 +25,12 @@ class EditPage extends StatelessWidget {
     if (editMode == EditMode.apps) {
       allItems = context.read<AppProvider>().allApps;
       favItems = context.read<AppProvider>().favApps;
-    } else {
+    } else if (editMode == EditMode.contacts) {
       allItems = context.read<ContactProvider>().allContacts;
       favItems = context.read<ContactProvider>().favContacts;
+    } else {
+      allItems = context.read<LineProvider>().favLineContacts;
+      favItems = context.read<LineProvider>().favLineContacts;
     }
 
     void backToHome() {
@@ -36,8 +40,10 @@ class EditPage extends StatelessWidget {
     void saveFavItems(List<String> newFavItems) {
       if (editMode == EditMode.apps) {
         context.read<AppProvider>().saveFavApps(newFavItems);
-      } else {
+      } else if (editMode == EditMode.contacts) {
         context.read<ContactProvider>().saveFavContacts(newFavItems);
+      } else {
+        context.read<LineProvider>().saveFavLineContacts(newFavItems);
       }
     }
 
@@ -46,7 +52,9 @@ class EditPage extends StatelessWidget {
       child: ElderPageScaffold(
         title: editMode == EditMode.apps
             ? S.of(context).dlgAppsAddRemove
-            : S.of(context).dlgContactsAddRemove,
+            : editMode == EditMode.contacts
+                ? S.of(context).dlgContactsAddRemove
+                : S.of(context).dlgLineAddRemove,
         body: Consumer<EditService>(builder: (_, editService, __) {
           if (editService.sortedItems.isNotEmpty) {
             return MultiSelectWidget(editService,

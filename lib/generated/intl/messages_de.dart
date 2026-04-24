@@ -22,46 +22,61 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Apps": MessageLookupByLibrary.simpleMessage("Apps"),
-        "Contacts": MessageLookupByLibrary.simpleMessage("Kontakte"),
-        "btnAddFavApps": MessageLookupByLibrary.simpleMessage(
-            "Favorisierte Apps hinzufügen"),
-        "btnAddFavContacts": MessageLookupByLibrary.simpleMessage(
-            "Favorisierte Kontakte hinzufügen"),
-        "btnAllApps": MessageLookupByLibrary.simpleMessage("Alle Apps"),
-        "btnAllContacts": MessageLookupByLibrary.simpleMessage("Alle Kontakte"),
-        "btnBackToHome": MessageLookupByLibrary.simpleMessage("Zurück"),
-        "btnGrantPermission":
-            MessageLookupByLibrary.simpleMessage("Erlaubnis erteilen"),
-        "btnSetDefaultLauncher":
-            MessageLookupByLibrary.simpleMessage("Als Standard festlegen"),
-        "dlgAppsAddRemove":
-            MessageLookupByLibrary.simpleMessage("Apps hinzufügen/entfernen"),
-        "dlgAppsReload":
-            MessageLookupByLibrary.simpleMessage("App Liste neu laden"),
-        "dlgAppsReorder":
-            MessageLookupByLibrary.simpleMessage("Apps neu anordnen"),
-        "dlgCall": MessageLookupByLibrary.simpleMessage("Anrufen"),
-        "dlgCancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
-        "dlgContactsAddRemove": MessageLookupByLibrary.simpleMessage(
-            "Kontakte hinzufügen/entfernen"),
-        "dlgContactsReload":
-            MessageLookupByLibrary.simpleMessage("Kontaktliste neu laden"),
-        "dlgContactsReorder":
-            MessageLookupByLibrary.simpleMessage("Kontakte neu anordnen"),
-        "dlgEditTitle":
-            MessageLookupByLibrary.simpleMessage("Favoriten bearbeiten"),
-        "dlgOpenSettings":
-            MessageLookupByLibrary.simpleMessage("Einstellungen ändern"),
-        "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
-            "Um diesem Bildschirm favorisierte Kontakte hinzuzufügen, erlauben Sie dieser App den Zugriff auf Ihre Kontakte."),
-        "msgNoData": MessageLookupByLibrary.simpleMessage(
-            "Keine Daten verfügbar. Versuchen Sie es in wenigen Sekunden erneut."),
-        "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
-            "Sie haben keine Favoriten hinzugefügt"),
-        "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
-            "Ermöglichen Sie dieser App, Anrufe für Sie zu starten, um das Telefonieren zu vereinfachen."),
-        "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
-            "Öffnen Sie Apps und Kontakte schneller, indem Sie Elder Launcher zur Heim-App machen.")
-      };
+    "Apps": MessageLookupByLibrary.simpleMessage("Apps"),
+    "Contacts": MessageLookupByLibrary.simpleMessage("Kontakte"),
+    "btnAddFavApps": MessageLookupByLibrary.simpleMessage(
+      "Favorisierte Apps hinzufügen",
+    ),
+    "btnAddFavContacts": MessageLookupByLibrary.simpleMessage(
+      "Favorisierte Kontakte hinzufügen",
+    ),
+    "btnAllApps": MessageLookupByLibrary.simpleMessage("Alle Apps"),
+    "btnAllContacts": MessageLookupByLibrary.simpleMessage("Alle Kontakte"),
+    "btnBackToHome": MessageLookupByLibrary.simpleMessage("Zurück"),
+    "btnGrantPermission": MessageLookupByLibrary.simpleMessage(
+      "Erlaubnis erteilen",
+    ),
+    "btnSetDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "Als Standard festlegen",
+    ),
+    "dlgAppsAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Apps hinzufügen/entfernen",
+    ),
+    "dlgAppsReload": MessageLookupByLibrary.simpleMessage(
+      "App Liste neu laden",
+    ),
+    "dlgAppsReorder": MessageLookupByLibrary.simpleMessage("Apps neu anordnen"),
+    "dlgCall": MessageLookupByLibrary.simpleMessage("Anrufen"),
+    "dlgCancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
+    "dlgContactsAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Kontakte hinzufügen/entfernen",
+    ),
+    "dlgContactsReload": MessageLookupByLibrary.simpleMessage(
+      "Kontaktliste neu laden",
+    ),
+    "dlgContactsReorder": MessageLookupByLibrary.simpleMessage(
+      "Kontakte neu anordnen",
+    ),
+    "dlgEditTitle": MessageLookupByLibrary.simpleMessage(
+      "Favoriten bearbeiten",
+    ),
+    "dlgOpenSettings": MessageLookupByLibrary.simpleMessage(
+      "Einstellungen ändern",
+    ),
+    "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
+      "Um diesem Bildschirm favorisierte Kontakte hinzuzufügen, erlauben Sie dieser App den Zugriff auf Ihre Kontakte.",
+    ),
+    "msgNoData": MessageLookupByLibrary.simpleMessage(
+      "Keine Daten verfügbar. Versuchen Sie es in wenigen Sekunden erneut.",
+    ),
+    "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
+      "Sie haben keine Favoriten hinzugefügt",
+    ),
+    "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
+      "Ermöglichen Sie dieser App, Anrufe für Sie zu starten, um das Telefonieren zu vereinfachen.",
+    ),
+    "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "Öffnen Sie Apps und Kontakte schneller, indem Sie Elder Launcher zur Heim-App machen.",
+    ),
+  };
 }

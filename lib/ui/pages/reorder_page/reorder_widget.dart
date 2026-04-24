@@ -1,3 +1,4 @@
+import '../../../utils/item_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../models/item.dart';
 import '../../../services/edit_service.dart';
@@ -23,6 +24,7 @@ class ReorderWidget extends StatelessWidget {
       children: favItems
           .map((item) => ReorderableCard(
                 item: item,
+                showId: showId,
                 key: Key(item.id),
               ))
           .toList(),
@@ -34,9 +36,11 @@ class ReorderableCard extends StatelessWidget {
   const ReorderableCard({
     super.key,
     required this.item,
+    required this.showId,
   });
 
   final Item item;
+  final bool showId;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +53,12 @@ class ReorderableCard extends StatelessWidget {
             item.name,
             style: TextStyles.listTitle,
           ),
+          subtitle: showId
+              ? Text(
+                  formatItemId(item.id),
+                  style: TextStyles.listTitle,
+                )
+              : null,
           leading: item.icon?.isNotEmpty ?? false
               ? Image(
                   image: MemoryImage(item.icon!),

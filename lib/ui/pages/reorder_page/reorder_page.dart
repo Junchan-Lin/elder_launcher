@@ -1,3 +1,4 @@
+import 'package:elder_launcher/providers/line_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/edit_mode.dart';
@@ -22,8 +23,10 @@ class ReorderPage extends StatelessWidget {
 
     if (editMode == EditMode.apps) {
       favItems = context.read<AppProvider>().favApps;
-    } else {
+    } else if (editMode == EditMode.contacts) {
       favItems = context.read<ContactProvider>().favContacts;
+    } else {
+      favItems = context.read<LineProvider>().favLineContacts;
     }
 
     void backToHome() {
@@ -33,8 +36,10 @@ class ReorderPage extends StatelessWidget {
     void saveFavItems(List<String> newFavItems) {
       if (editMode == EditMode.apps) {
         context.read<AppProvider>().saveFavApps(newFavItems);
-      } else {
+      } else if (editMode == EditMode.contacts) {
         context.read<ContactProvider>().saveFavContacts(newFavItems);
+      } else {
+        context.read<LineProvider>().saveFavLineContacts(newFavItems);
       }
     }
 
@@ -43,11 +48,13 @@ class ReorderPage extends StatelessWidget {
       child: ElderPageScaffold(
         title: editMode == EditMode.apps
             ? S.of(context).dlgAppsReorder
-            : S.of(context).dlgContactsReorder,
+            : editMode == EditMode.contacts
+                ? S.of(context).dlgContactsReorder
+                : S.of(context).dlgLineReorder,
         body: Consumer<EditService>(builder: (_, editService, __) {
           if (editService.sortedItems.isNotEmpty) {
             return ReorderWidget(editService,
-                showId: editMode == EditMode.contacts ? true : false);
+                showId: editMode == EditMode.contacts || editMode == EditMode.line);
           } else {
             return InfoActionWidget.close(
                 message: S.of(context).msgNoData,

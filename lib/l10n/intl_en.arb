@@ -22,5 +22,15 @@
     "dlgAppsReload": "Reload App List",
     "dlgContactsAddRemove": "Add/Remove Contacts",
     "dlgContactsReorder": "Reorder Contacts",
-    "dlgContactsReload": "Reload Contacts"
+    "dlgContactsReload": "Reload Contacts",
+    "Line": "Line",
+    "btnAddFavLine": "Add Line Contact",
+    "dlgLineAddRemove": "Add/Remove Line Contacts",
+    "dlgLineReorder": "Reorder Line Contacts",
+    "msgNoLineId": "Please enter a Line ID",
+    "dlgAddLineTitle": "Add Line Contact",
+    "hintLineId": "Line ID",
+    "hintLineName": "Name",
+    "btnCancel": "Cancel",
+    "btnAdd": "Add"
 }

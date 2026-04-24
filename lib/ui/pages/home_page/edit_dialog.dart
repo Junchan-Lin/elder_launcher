@@ -1,3 +1,4 @@
+import 'package:elder_launcher/providers/line_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,20 @@ import '../../../ui/theme.dart';
 
 // ignore: non_constant_identifier_names
 Future EditDialog(BuildContext context, EditMode editMode) {
+  String addRemoveText;
+  String reorderText;
+
+  if (editMode == EditMode.apps) {
+    addRemoveText = S.of(context).dlgAppsAddRemove;
+    reorderText = S.of(context).dlgAppsReorder;
+  } else if (editMode == EditMode.contacts) {
+    addRemoveText = S.of(context).dlgContactsAddRemove;
+    reorderText = S.of(context).dlgContactsReorder;
+  } else {
+    addRemoveText = S.of(context).dlgLineAddRemove;
+    reorderText = S.of(context).dlgLineReorder;
+  }
+
   return showCupertinoModalPopup(
     context: context,
     builder: (context) => CupertinoActionSheet(
@@ -28,9 +43,7 @@ Future EditDialog(BuildContext context, EditMode editMode) {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(
-              editMode == EditMode.apps
-                  ? S.of(context).dlgAppsAddRemove
-                  : S.of(context).dlgContactsAddRemove,
+              addRemoveText,
               style: TextStyles.dialogAction,
             ),
           ),
@@ -43,9 +56,7 @@ Future EditDialog(BuildContext context, EditMode editMode) {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(
-              editMode == EditMode.apps
-                  ? S.of(context).dlgAppsReorder
-                  : S.of(context).dlgContactsReorder,
+              reorderText,
               style: TextStyles.dialogAction,
             ),
           ),
@@ -55,15 +66,19 @@ Future EditDialog(BuildContext context, EditMode editMode) {
             Navigator.pop(context),
             if (editMode == EditMode.apps)
               {context.read<AppProvider>().reloadLists()}
-            else
+            else if (editMode == EditMode.contacts)
               {context.read<ContactProvider>().reloadLists()}
+            else
+              {context.read<LineProvider>().reloadLists()}
           },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(
               editMode == EditMode.apps
                   ? S.of(context).dlgAppsReload
-                  : S.of(context).dlgContactsReload,
+                  : editMode == EditMode.contacts
+                      ? S.of(context).dlgContactsReload
+                      : S.of(context).dlgContactsReload, // Reuse string
               style: TextStyles.dialogAction,
             ),
           ),

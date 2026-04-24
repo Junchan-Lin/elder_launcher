@@ -18,17 +18,20 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,8 +44,10 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -52,32 +57,17 @@ class S {
 
   /// `Apps`
   String get Apps {
-    return Intl.message(
-      'Apps',
-      name: 'Apps',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Apps', name: 'Apps', desc: '', args: []);
   }
 
   /// `Contacts`
   String get Contacts {
-    return Intl.message(
-      'Contacts',
-      name: 'Contacts',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Contacts', name: 'Contacts', desc: '', args: []);
   }
 
   /// `All Apps`
   String get btnAllApps {
-    return Intl.message(
-      'All Apps',
-      name: 'btnAllApps',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('All Apps', name: 'btnAllApps', desc: '', args: []);
   }
 
   /// `All Contacts`
@@ -192,12 +182,7 @@ class S {
 
   /// `Call`
   String get dlgCall {
-    return Intl.message(
-      'Call',
-      name: 'dlgCall',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Call', name: 'dlgCall', desc: '', args: []);
   }
 
   /// `Edit Favourites`
@@ -212,12 +197,7 @@ class S {
 
   /// `Cancel`
   String get dlgCancel {
-    return Intl.message(
-      'Cancel',
-      name: 'dlgCancel',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Cancel', name: 'dlgCancel', desc: '', args: []);
   }
 
   /// `Open Settings`
@@ -289,6 +269,81 @@ class S {
       args: [],
     );
   }
+
+  /// `Line`
+  String get Line {
+    return Intl.message('Line', name: 'Line', desc: '', args: []);
+  }
+
+  /// `Add Line Contact`
+  String get btnAddFavLine {
+    return Intl.message(
+      'Add Line Contact',
+      name: 'btnAddFavLine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add/Remove Line Contacts`
+  String get dlgLineAddRemove {
+    return Intl.message(
+      'Add/Remove Line Contacts',
+      name: 'dlgLineAddRemove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reorder Line Contacts`
+  String get dlgLineReorder {
+    return Intl.message(
+      'Reorder Line Contacts',
+      name: 'dlgLineReorder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a Line ID`
+  String get msgNoLineId {
+    return Intl.message(
+      'Please enter a Line ID',
+      name: 'msgNoLineId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Line Contact`
+  String get dlgAddLineTitle {
+    return Intl.message(
+      'Add Line Contact',
+      name: 'dlgAddLineTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Line ID`
+  String get hintLineId {
+    return Intl.message('Line ID', name: 'hintLineId', desc: '', args: []);
+  }
+
+  /// `Name`
+  String get hintLineName {
+    return Intl.message('Name', name: 'hintLineName', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get btnCancel {
+    return Intl.message('Cancel', name: 'btnCancel', desc: '', args: []);
+  }
+
+  /// `Add`
+  String get btnAdd {
+    return Intl.message('Add', name: 'btnAdd', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -308,6 +363,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
       Locale.fromSubtags(languageCode: 'pl'),
       Locale.fromSubtags(languageCode: 'pt'),
       Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+      Locale.fromSubtags(languageCode: 'zh', countryCode: 'TW'),
     ];
   }
 
