@@ -16,7 +16,7 @@ subprojects {
         if (project.extensions.findByName('android') != null) {
             // 1. 強制設定 Namespace
             if (project.android.namespace == null) {
-                project.android.namespace = "xyz.arjunsinh.${project.name.replace("-", "_")}"
+                project.android.namespace = "com.code_sky.${project.name.replace("-", "_")}"
             }
             
             // 2. 動態修復 Manifest (解決 Incorrect package 錯誤)

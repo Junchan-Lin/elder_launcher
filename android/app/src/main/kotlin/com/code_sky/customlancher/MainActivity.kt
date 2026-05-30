@@ -1,4 +1,4 @@
-package xyz.arjunsinh.elderlauncher
+package com.code_sky.customlancher
 
 import android.app.role.RoleManager
 import android.content.Context

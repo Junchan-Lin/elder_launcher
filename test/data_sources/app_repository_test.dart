@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:elder_launcher/constants/keys.dart';
 import 'package:elder_launcher/data_sources/app_repository.dart';
+import 'package:elder_launcher/utils/shared_prefs.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,9 +9,10 @@ import '../test_data/fake_apps.dart';
 import '../test_utils/set_mock_apps.dart';
 
 void main() {
-  setUpAll(() {
+  setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     setMockApps();
+    await SharedPrefs.init();
   });
 
   test('Loads all apps', () async {
@@ -30,7 +32,7 @@ void main() {
   });
 
   group('Scenario: Missing Fav App', () {
-    setUp(() {
+    setUp(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
 
       // Add package name of app that isn't installed
@@ -39,6 +41,7 @@ void main() {
 
       SharedPreferences.setMockInitialValues(
           <String, Object>{'flutter.$keyFavApps': packageNames});
+      await SharedPrefs.init();
 
       const deviceAppsChannel = MethodChannel('g123k/device_apps');
       final allApps = fakeInstalledApps;

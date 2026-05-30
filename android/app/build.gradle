@@ -16,7 +16,7 @@ def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '
 def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
 
 android {
-    namespace "xyz.arjunsinh.elderlauncher"
+    namespace "com.code_sky.customlancher"
     compileSdk 36
 
     sourceSets {
@@ -24,7 +24,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "xyz.arjunsinh.elderlauncher"
+        applicationId "com.code_sky.customlancher"
         minSdkVersion flutter.minSdkVersion
         targetSdk 34
         versionCode flutterVersionCode.toInteger()
