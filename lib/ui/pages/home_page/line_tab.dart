@@ -1,4 +1,6 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../generated/l10n.dart';
 import '../../../providers/line_provider.dart';
@@ -10,51 +12,84 @@ import '../../../ui/common/loading_widget.dart';
 import '../../../ui/pages/home_page/fav_grid_view.dart';
 
 class LineTab extends StatelessWidget {
-  const LineTab({
-    Key? key,
-  }) : super(key: key);
+  const LineTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     void openAddLineDialog() {
+      final lineProvider = context.read<LineProvider>();
       showDialog(
         context: context,
-        builder: (context) {
+        builder: (dialogContext) {
           final idController = TextEditingController();
           final nameController = TextEditingController();
-          return AlertDialog(
-            title: Text(S.of(context).dlgAddLineTitle),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameController,
-                  decoration: InputDecoration(hintText: S.of(context).hintLineName),
+          Uint8List? selectedImageBytes;
+
+          return StatefulBuilder(
+            builder: (sbContext, setState) {
+              return AlertDialog(
+                title: Text(S.of(sbContext).dlgAddLineTitle),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final picked = await ImagePicker().pickImage(
+                          source: ImageSource.gallery,
+                          maxWidth: 200,
+                          maxHeight: 200,
+                          imageQuality: 80,
+                        );
+                        if (picked != null) {
+                          final bytes = await picked.readAsBytes();
+                          setState(() => selectedImageBytes = bytes);
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: selectedImageBytes != null
+                            ? MemoryImage(selectedImageBytes!)
+                            : null,
+                        child: selectedImageBytes == null
+                            ? const Icon(Icons.add_a_photo, size: 30)
+                            : null,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                          hintText: S.of(sbContext).hintLineName),
+                    ),
+                    TextField(
+                      controller: idController,
+                      decoration:
+                          InputDecoration(hintText: S.of(sbContext).hintLineId),
+                    ),
+                  ],
                 ),
-                TextField(
-                  controller: idController,
-                  decoration: InputDecoration(hintText: S.of(context).hintLineId),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).btnCancel),
-              ),
-              TextButton(
-                onPressed: () {
-                  if (idController.text.isNotEmpty && nameController.text.isNotEmpty) {
-                    context.read<LineProvider>().addLineContact(
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: Text(S.of(sbContext).btnCancel),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (idController.text.isNotEmpty &&
+                          nameController.text.isNotEmpty) {
+                        lineProvider.addLineContactWithAvatar(
                           idController.text,
                           nameController.text,
+                          selectedImageBytes,
                         );
-                    Navigator.pop(context);
-                  }
-                },
-                child: Text(S.of(context).btnAdd),
-              ),
-            ],
+                        Navigator.pop(dialogContext);
+                      }
+                    },
+                    child: Text(S.of(sbContext).btnAdd),
+                  ),
+                ],
+              );
+            },
           );
         },
       );
@@ -72,7 +107,12 @@ class LineTab extends StatelessWidget {
               children: <Widget>[
                 if (lineProvider.isFavListLoaded &&
                     lineProvider.favLineContacts.isNotEmpty) ...[
-                  FavGridView(lineProvider.favLineContacts, callLine)
+                  FavGridView(
+                    lineProvider.favLineContacts,
+                    callLine,
+                    circular: true,
+                    showLineBadge: true,
+                  )
                 ] else if (lineProvider.isFavListLoaded &&
                     lineProvider.favLineContacts.isEmpty) ...[
                   Expanded(

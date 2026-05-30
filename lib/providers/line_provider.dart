@@ -26,8 +26,8 @@ class LineProvider extends ChangeNotifier {
   }
 
   Future<void> callLine(String combinedId) async {
-    final url = Uri.parse(
-        'https://line.me/R/ti/p/~${formatItemId(combinedId)}');
+    final url =
+        Uri.parse('https://line.me/R/ti/p/~${formatItemId(combinedId)}');
     try {
       if (await canLaunchUrl(url)) {
         await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -50,6 +50,15 @@ class LineProvider extends ChangeNotifier {
 
   Future<void> addLineContact(String id, String name) async {
     await _repository.addLineContact(id, name);
+    _loadFavItems();
+  }
+
+  Future<void> addLineContactWithAvatar(
+      String id, String name, Uint8List? avatarBytes) async {
+    await _repository.addLineContact(id, name);
+    if (avatarBytes != null) {
+      _repository.setLineAvatar('$id|$name', avatarBytes);
+    }
     _loadFavItems();
   }
 }
