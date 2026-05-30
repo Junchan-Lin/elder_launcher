@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../data_sources/line_repository.dart';
 import '../models/item.dart';
+import '../utils/item_utils.dart';
 
 class LineProvider extends ChangeNotifier {
   bool _isFavListLoaded = false;
@@ -25,12 +26,16 @@ class LineProvider extends ChangeNotifier {
   }
 
   Future<void> callLine(String combinedId) async {
-    // Standard way to open a Line profile by ID.
-    // combinedId is "id|name"
-    var lineId = combinedId.split('|')[0];
-    final url = Uri.parse('https://line.me/R/ti/p/~$lineId');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+    final url = Uri.parse(
+        'https://line.me/R/ti/p/~${formatItemId(combinedId)}');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        debugPrint('無法開啟 LINE 連結');
+      }
+    } catch (e) {
+      debugPrint('呼叫 LINE 時發生錯誤: $e');
     }
   }
 
