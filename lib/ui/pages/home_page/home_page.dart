@@ -1,5 +1,6 @@
 import 'package:elder_launcher/ui/pages/home_page/line_tab.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/edit_mode.dart';
@@ -97,7 +98,7 @@ class HomePage extends StatelessWidget {
                           children: <Widget>[
                             const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),
-                              child: Icon(Icons.apps),
+                              child: FaIcon(FontAwesomeIcons.grip),
                             ),
                             Flexible(
                               child: AutoSizeText(
@@ -118,7 +119,7 @@ class HomePage extends StatelessWidget {
                           children: <Widget>[
                             const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),
-                              child: Icon(Icons.contacts),
+                              child: FaIcon(FontAwesomeIcons.addressBook),
                             ),
                             Flexible(
                               child: AutoSizeText(
@@ -139,7 +140,7 @@ class HomePage extends StatelessWidget {
                           children: <Widget>[
                             const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),
-                              child: Icon(Icons.message),
+                              child: FaIcon(FontAwesomeIcons.line),
                             ),
                             Flexible(
                               child: AutoSizeText(
