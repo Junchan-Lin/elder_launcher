@@ -22,10 +22,11 @@ class AppProvider extends ChangeNotifier {
   final _methodChannel = const MethodChannel(channelCore);
   final AppRepository _repository;
   late final Timer _refreshTimer;
+  late final StreamSubscription<ApplicationEvent> _appSub;
 
   AppProvider(this._repository) {
     _loadApps();
-    _appEvent.listen((event) {
+    _appSub = _appEvent.listen((event) {
       _loadApps();
     });
     _refreshTimer =
@@ -42,7 +43,7 @@ class AppProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    _appEvent.listen((event) {}).cancel();
+    _appSub.cancel();
     _refreshTimer.cancel();
     super.dispose();
   }
@@ -50,7 +51,7 @@ class AppProvider extends ChangeNotifier {
   Future<void> _loadApps() async {
     _loadAllItems();
     _loadFavItems();
-    var isFirstRun = await SharedPrefs().getBool(keyIsFirstRun, true);
+    var isFirstRun = SharedPrefs.getBool(keyIsFirstRun, true);
     if (isFirstRun) {
       _restoreFavAppsFromDeprecatedList();
     }
@@ -80,7 +81,7 @@ class AppProvider extends ChangeNotifier {
     if (deprecatedFavAppIds.isNotEmpty) {
       saveFavApps(deprecatedFavAppIds);
     }
-    SharedPrefs().setBool(keyIsFirstRun, false);
+    SharedPrefs.setBool(keyIsFirstRun, false);
   }
 
   void launchApp(String packageName) {
