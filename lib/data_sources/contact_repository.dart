@@ -14,7 +14,7 @@ class ContactRepository implements DataRepository {
 
   @override
   Future<List<item.Item>> getFavItems() async {
-    var favContactNumbers = await SharedPrefs().getList(keyFavContacts);
+    var favContactNumbers = SharedPrefs.getList(keyFavContacts);
     var favContacts = <item.Item>[];
     for (var number in favContactNumbers) {
       favContacts.add(
@@ -25,7 +25,7 @@ class ContactRepository implements DataRepository {
 
   @override
   void setFavItems(List<String> favNumbers) {
-    SharedPrefs().setList(keyFavContacts, favNumbers);
+    SharedPrefs.setList(keyFavContacts, favNumbers);
   }
 
   // TODO: Performance optimization

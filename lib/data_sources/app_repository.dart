@@ -17,47 +17,34 @@ class AppRepository implements DataRepository {
 
   @override
   Future<List<Item>> getFavItems() async {
-    var favPackages = await SharedPrefs().getList(keyFavApps);
-    var favApps = <ApplicationWithIcon>[];
-
-    for (var packageName in favPackages) {
-      var app = await DeviceApps.getApp(packageName, true);
-      if (app != null) favApps.add(app as ApplicationWithIcon);
-    }
-
+    var favPackages = SharedPrefs.getList(keyFavApps);
+    final results = await Future.wait(
+      favPackages.map((p) => DeviceApps.getApp(p, true)),
+    );
+    final favApps = results.whereType<ApplicationWithIcon>().toList();
     return _toItems(favApps);
   }
 
   @override
   void setFavItems(List<String> favPackages) {
-    SharedPrefs().setList(keyFavApps, favPackages);
+    SharedPrefs.setList(keyFavApps, favPackages);
   }
 
   Future<List<Item>> _toItems(List<Application> apps) async {
-    var apps0 = <Item>[];
-
-    for (final app in apps) {
-      apps0.add(
-        Item(
-            app.packageName,
-            app.appName,
-            app is ApplicationWithIcon
-                ? app.icon as Uint8List // ignore: unnecessary_cast
-                : null),
-      );
-    }
-
-    return apps0;
+    return apps
+        .map((app) => Item(
+              app.packageName,
+              app.appName,
+              app is ApplicationWithIcon
+                  ? app.icon as Uint8List // ignore: unnecessary_cast
+                  : null,
+            ))
+        .toList();
   }
 
   // TODO: Sort Apps as per locale and pronounciation
-  Future<List<Item>> _sortItems(List<Item> apps) async {
+  List<Item> _sortItems(List<Item> apps) {
     apps.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-
-    /*
-    unorm sort causing slowdown
-    _apps.sort((a, b) => unorm.nfd(a.name).compareTo(unorm.nfd(b.name)));
-    */
     return apps;
   }
 }
