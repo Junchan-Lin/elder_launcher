@@ -100,10 +100,86 @@ final results = await Future.wait(
 
 ---
 
+## Section 4：Package 更名
+
+**目標：** `xyz.arjunsinh.elderlauncher` → `com.code_sky.customlancher`
+
+**家用客製化版本，不上架 Play Store。**
+
+涉及變更：
+- `android/app/build.gradle`：`applicationId "com.code_sky.customlancher"`
+- `android/app/src/main/AndroidManifest.xml`：`package="com.code_sky.customlancher"`
+- Kotlin 原始碼目錄：`xyz/arjunsinh/elderlauncher/` → `com/code_sky/customlancher/`（實體資料夾搬移）
+- 所有 Kotlin 檔案頂端的 `package xyz.arjunsinh.elderlauncher` → `package com.code_sky.customlancher`
+- 任何 `import xyz.arjunsinh.elderlauncher` 的參照
+
+**注意：** 因為不上架，不需要處理 Play Store 遷移（Google Play 的 app 更名限制）。
+
+---
+
+## Section 5：Lock 功能
+
+**目的：** 防止放在口袋時因誤觸而改動常用聯絡人 / APP 排列。Tab 切換仍可正常使用（方便查看），只鎖定編輯操作。
+
+### UI
+
+- AppBar 右上角：Lock 圖示（`Icons.lock` / `Icons.lock_open`）
+- **鎖定時**：
+  - 隱藏 AppBar 的編輯鈕（鉛筆圖示）
+  - 隱藏各 Tab 底部的 `PrimaryButton`（「所有 App」、「所有聯絡人」、「新增 Line 聯絡人」）
+- **解鎖時**：恢復全部操作按鈕
+
+### 互動
+
+- **雙擊** Lock 圖示切換鎖定/解鎖狀態
+- Tab 滑動與點擊仍正常（只禁止編輯操作）
+
+### 實作
+
+**`LockProvider`（新增）：**
+```dart
+class LockProvider extends ChangeNotifier {
+  bool _isLocked = true; // 預設鎖定
+
+  bool get isLocked => _isLocked;
+
+  LockProvider() {
+    _loadLockState();
+  }
+
+  Future<void> _loadLockState() async {
+    _isLocked = SharedPrefs.getBool(keyIsLocked, true);
+    notifyListeners();
+  }
+
+  void toggleLock() {
+    _isLocked = !_isLocked;
+    SharedPrefs.setBool(keyIsLocked, _isLocked);
+    notifyListeners();
+  }
+}
+```
+
+**`keys.dart`：** 新增 `const keyIsLocked = 'key_is_locked'`
+
+**`main.dart`：** MultiProvider 加入 `ChangeNotifierProvider<LockProvider>`
+
+**`home_page.dart`：**
+- AppBar actions 改用 `Consumer<LockProvider>`
+- Lock 圖示使用 `GestureDetector` 的 `onDoubleTap` 呼叫 `lockProvider.toggleLock()`
+- `isLocked` 為 true 時隱藏編輯鈕
+
+**各 Tab（`AppsTab`、`ContactsTab`、`LineTab`）：**
+- 底部 `PrimaryButton` 包在 `Consumer<LockProvider>` 中
+- `isLocked` 為 true 時回傳 `SizedBox.shrink()`
+
+---
+
 ## 不在此次範圍內
 
-- 新增功能（SettingsPage 實際功能實作）
+- SettingsPage 實際功能實作
 - 主題切換
+- Tab 順序調整（維持原本 Apps → 聯絡人 → LINE，避免口袋誤觸撥出電話）
 - `ContactRepository._toDistinctItems()` 的效能重寫（需要更廣泛的測試）
 - UI 視覺調整
 
@@ -114,7 +190,7 @@ final results = await Future.wait(
 | 檔案 | 變更類型 |
 |------|--------|
 | `lib/utils/shared_prefs.dart` | 重構（靜態快取） |
-| `lib/main.dart` | 新增 `SharedPrefs.init()` |
+| `lib/main.dart` | 新增 `SharedPrefs.init()`、加入 `LockProvider` |
 | `lib/models/interfaces/data_repository.dart` | 介面修改 |
 | `lib/data_sources/app_repository.dart` | Bug 修復 + 效能 |
 | `lib/data_sources/contact_repository.dart` | Bug 修復 |
@@ -122,6 +198,15 @@ final results = await Future.wait(
 | `lib/providers/app_provider.dart` | Bug 修復（記憶體洩漏） |
 | `lib/providers/contact_provider.dart` | 架構改善 |
 | `lib/providers/line_provider.dart` | Bug 修復 + 重構 |
+| `lib/providers/lock_provider.dart` | 新增 |
 | `lib/ui/pages/home_page/edit_dialog.dart` | Bug 修復（文字 key） |
+| `lib/ui/pages/home_page/home_page.dart` | Lock UI 整合 |
+| `lib/ui/pages/home_page/apps_tab.dart` | Lock 整合（隱藏底部按鈕） |
+| `lib/ui/pages/home_page/contacts_tab.dart` | Lock 整合（隱藏底部按鈕） |
+| `lib/ui/pages/home_page/line_tab.dart` | Lock 整合（隱藏底部按鈕） |
 | `lib/ui/pages/settings_page/settings_page.dart` | 清理 |
+| `lib/constants/keys.dart` | 新增 `keyIsLocked` |
 | `lib/l10n/*.arb`（各語言） | 新增 `dlgLineReload` |
+| `android/app/build.gradle` | Package 更名 |
+| `android/app/src/main/AndroidManifest.xml` | Package 更名 |
+| `android/app/src/main/kotlin/` | 目錄結構 + Kotlin package 更名 |
