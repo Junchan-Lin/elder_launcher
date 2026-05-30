@@ -26,4 +26,11 @@ class SharedPrefs {
 
   static void setInt(String key, int value) =>
       _prefs!.setInt(key, value);
+
+  static String? getString(String key) => _prefs!.getString(key);
+
+  static void setString(String key, String value) =>
+      _prefs!.setString(key, value);
+
+  static void removeKey(String key) => _prefs!.remove(key);
 }

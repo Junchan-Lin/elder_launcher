@@ -26,4 +26,19 @@ void main() {
     SharedPrefs.setBool('b', false);
     expect(SharedPrefs.getBool('b', true), isFalse);
   });
+
+  test('getString 對不存在的 key 回傳 null', () {
+    expect(SharedPrefs.getString('nonexistent_str'), isNull);
+  });
+
+  test('setString 後 getString 回傳已存值', () {
+    SharedPrefs.setString('str_key', 'hello');
+    expect(SharedPrefs.getString('str_key'), equals('hello'));
+  });
+
+  test('removeKey 後 getString 回傳 null', () {
+    SharedPrefs.setString('remove_me', 'value');
+    SharedPrefs.removeKey('remove_me');
+    expect(SharedPrefs.getString('remove_me'), isNull);
+  });
 }
