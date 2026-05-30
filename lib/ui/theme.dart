@@ -47,7 +47,7 @@ class TextStyles {
   static const cardTitle = TextStyle(fontSize: 30);
   static const listTitle = TextStyle(fontSize: 30);
   static const headerTime = TextStyle(fontSize: 40);
-  static const headerDate = TextStyle(color: Colors.white, fontSize: 30);
+  static const headerDate = TextStyle(fontSize: 30);
   static const infoMessage = TextStyle(fontSize: 25);
   static const actionButtonLabel = TextStyle(color: Colors.white, fontSize: 30);
   static const primaryButtonLabel =
