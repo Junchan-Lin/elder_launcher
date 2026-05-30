@@ -79,15 +79,37 @@ class HomePage extends StatelessWidget {
               ),
             ),
             bottom: PreferredSize(
-              preferredSize: const Size(0, 80),
+              preferredSize: const Size(0, 120),
               child: Column(
                 children: <Widget>[
                   Consumer<DateTimeProvider>(
-                    builder: (_, dateTimeProvider, __) => AutoSizeText(
-                      dateTimeProvider.date,
-                      group: appBarTextSizeGroup,
-                      maxLines: 1,
-                      style: TextStyles.headerDate,
+                    builder: (_, dateTimeProvider, __) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AutoSizeText(
+                          dateTimeProvider.date,
+                          group: appBarTextSizeGroup,
+                          maxLines: 1,
+                          style: TextStyles.headerDate,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AutoSizeText(
+                              dateTimeProvider.lunarDate,
+                              group: appBarTextSizeGroup,
+                              maxLines: 1,
+                              style: TextStyles.headerLunar,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.volume_up),
+                              onPressed: () => dateTimeProvider.speakDate(),
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   TabBar(tabs: [
