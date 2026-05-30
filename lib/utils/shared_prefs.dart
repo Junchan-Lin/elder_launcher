@@ -4,7 +4,7 @@ class SharedPrefs {
   static SharedPreferences? _prefs;
 
   static Future<void> init() async {
-    _prefs ??= await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
   }
 
   static List<String> getList(String key) =>

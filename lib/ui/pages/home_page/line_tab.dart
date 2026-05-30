@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../generated/l10n.dart';
 import '../../../providers/line_provider.dart';
 import '../../../models/item.dart';
+import '../../../providers/lock_provider.dart';
 import '../../../ui/common/buttons.dart';
 import '../../../ui/common/info_action_widget.dart';
 import '../../../ui/common/loading_widget.dart';
@@ -88,12 +89,16 @@ class LineTab extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: PrimaryButton(
-            S.of(context).btnAddFavLine,
-            openAddLineDialog,
-          ),
+        Consumer<LockProvider>(
+          builder: (context, lockProvider, _) => lockProvider.isLocked
+              ? const SizedBox.shrink()
+              : Align(
+                  alignment: Alignment.bottomCenter,
+                  child: PrimaryButton(
+                    S.of(context).btnAddFavLine,
+                    openAddLineDialog,
+                  ),
+                ),
         ),
       ],
     );

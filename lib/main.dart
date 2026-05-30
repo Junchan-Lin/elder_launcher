@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
 import 'providers/app_provider.dart';
 import 'providers/contact_provider.dart';
+import 'providers/lock_provider.dart';
 import 'ui/pages/home_page/home_page.dart';
 import 'ui/router.dart';
 import 'ui/theme.dart';
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
             create: (_) => ContactProvider(ContactRepository())),
         ChangeNotifierProvider<LineProvider>(
             create: (_) => LineProvider(LineRepository())),
+        ChangeNotifierProvider<LockProvider>(
+            create: (_) => LockProvider()),
       ],
       child: MaterialApp(
         title: 'Elder Launcher',

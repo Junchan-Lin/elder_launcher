@@ -10,6 +10,7 @@ import '../../../ui/common/info_action_widget.dart';
 import '../../../ui/common/loading_widget.dart';
 import '../../../ui/pages/home_page/fav_grid_view.dart';
 import '../../common/action_panel.dart';
+import '../../../providers/lock_provider.dart';
 
 class AppsTab extends StatelessWidget {
   const AppsTab({
@@ -74,9 +75,14 @@ class AppsTab extends StatelessWidget {
           ),
         ),
       ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: PrimaryButton(S.of(context).btnAllApps, openAllApps),
+      Consumer<LockProvider>(
+        builder: (context, lockProvider, _) => lockProvider.isLocked
+            ? const SizedBox.shrink()
+            : Align(
+                alignment: Alignment.bottomCenter,
+                child:
+                    PrimaryButton(S.of(context).btnAllApps, openAllApps),
+              ),
       ),
     ]);
   }

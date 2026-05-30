@@ -11,6 +11,7 @@ import '../../../ui/common/loading_widget.dart';
 import '../../../ui/pages/home_page/call_dialog.dart';
 import '../../../ui/pages/home_page/fav_grid_view.dart';
 import '../../common/action_panel.dart';
+import '../../../providers/lock_provider.dart';
 
 class ContactsTab extends StatelessWidget {
   const ContactsTab({
@@ -94,12 +95,16 @@ class ContactsTab extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: PrimaryButton(
-            S.of(context).btnAllContacts,
-            openAllContacts,
-          ),
+        Consumer<LockProvider>(
+          builder: (context, lockProvider, _) => lockProvider.isLocked
+              ? const SizedBox.shrink()
+              : Align(
+                  alignment: Alignment.bottomCenter,
+                  child: PrimaryButton(
+                    S.of(context).btnAllContacts,
+                    openAllContacts,
+                  ),
+                ),
         ),
       ],
     );

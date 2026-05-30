@@ -8,6 +8,7 @@ import '../../../providers/date_time_provider.dart';
 import '../../../ui/pages/home_page/apps_tab.dart';
 import '../../../ui/pages/home_page/contacts_tab.dart';
 import '../../../ui/pages/home_page/edit_dialog.dart';
+import '../../../providers/lock_provider.dart';
 import '../../../ui/theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -39,13 +40,32 @@ class HomePage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
             actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    openEditDialog(DefaultTabController.of(context).index);
-                                    },
+              Consumer<LockProvider>(
+                builder: (context, lockProvider, _) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (!lockProvider.isLocked)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => openEditDialog(
+                              DefaultTabController.of(context).index),
+                        ),
+                      ),
+                    GestureDetector(
+                      onDoubleTap: () =>
+                          context.read<LockProvider>().toggleLock(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Icon(
+                          lockProvider.isLocked
+                              ? Icons.lock
+                              : Icons.lock_open,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
