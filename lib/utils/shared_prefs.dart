@@ -1,36 +1,29 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
-  Future<List<String>> getList(String key) async {
-    var prefs = await SharedPreferences.getInstance();
-    var stringList = prefs.getStringList(key) ?? [];
-    return stringList;
+  static SharedPreferences? _prefs;
+
+  static Future<void> init() async {
+    _prefs ??= await SharedPreferences.getInstance();
   }
 
-  Future<void> setList(String key, List<String> stringList) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(key, stringList);
-  }
+  static List<String> getList(String key) =>
+      _prefs!.getStringList(key) ?? [];
 
-  // ignore: avoid_positional_boolean_parameters
-  Future<bool> getBool(String key, bool defaultValue) async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(key) ?? defaultValue;
-  }
+  static void setList(String key, List<String> stringList) =>
+      _prefs!.setStringList(key, stringList);
 
   // ignore: avoid_positional_boolean_parameters
-  Future<void> setBool(String key, bool value) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(key, value);
-  }
+  static bool getBool(String key, bool defaultValue) =>
+      _prefs!.getBool(key) ?? defaultValue;
 
-  Future<int> getInt(String key, int defaultValue) async {
-    var prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(key) ?? defaultValue;
-  }
+  // ignore: avoid_positional_boolean_parameters
+  static void setBool(String key, bool value) =>
+      _prefs!.setBool(key, value);
 
-  Future<void> setInt(String key, int value) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(key, value);
-  }
+  static int getInt(String key, int defaultValue) =>
+      _prefs!.getInt(key) ?? defaultValue;
+
+  static void setInt(String key, int value) =>
+      _prefs!.setInt(key, value);
 }

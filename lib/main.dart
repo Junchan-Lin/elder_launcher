@@ -3,6 +3,7 @@ import 'package:elder_launcher/providers/line_provider.dart';
 import 'package:elder_launcher/data_sources/app_repository.dart';
 import 'package:elder_launcher/data_sources/contact_repository.dart';
 import 'package:flutter/material.dart';
+import 'utils/shared_prefs.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
@@ -12,7 +13,11 @@ import 'ui/pages/home_page/home_page.dart';
 import 'ui/router.dart';
 import 'ui/theme.dart';
 
-void main() {runApp(const MyApp());}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
