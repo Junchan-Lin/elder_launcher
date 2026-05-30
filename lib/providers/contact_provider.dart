@@ -13,9 +13,9 @@ class ContactProvider extends ChangeNotifier {
   bool _isPhonePermissionChecked = false;
   bool _isTelephoneFeatureChecked = false;
 
-  late bool _hasTelephoneFeature;
-  late bool _isContactsPermissionGranted;
-  late bool _isPhonePermissionGranted;
+  bool? _hasTelephoneFeature;
+  bool? _isContactsPermissionGranted;
+  bool? _isPhonePermissionGranted;
   late Timer _refreshTimer;
 
   List<Item> _allContacts = [];
@@ -33,11 +33,11 @@ class ContactProvider extends ChangeNotifier {
   bool get isContactListLoaded => _isContactListLoaded;
   bool get isFavListLoaded => _isFavListLoaded;
   bool get isContactsPermissionChecked => _isContactsPermissionChecked;
-  bool get isContactsPermissionGranted => _isContactsPermissionGranted;
+  bool get isContactsPermissionGranted => _isContactsPermissionGranted ?? false;
   bool get isPhonePermissionChecked => _isPhonePermissionChecked;
-  bool get isPhonePermissionGranted => _isPhonePermissionGranted;
+  bool get isPhonePermissionGranted => _isPhonePermissionGranted ?? false;
   bool get isTelephoneFeatureChecked => _isTelephoneFeatureChecked;
-  bool get hasTelephoneFeature => _hasTelephoneFeature;
+  bool get hasTelephoneFeature => _hasTelephoneFeature ?? false;
   UnmodifiableListView<Item> get allContacts =>
       UnmodifiableListView(_allContacts);
   UnmodifiableListView<Item> get favContacts =>
@@ -110,7 +110,7 @@ class ContactProvider extends ChangeNotifier {
 
   Future<void> callPhoneNumber(String number) async {
     if (_isTelephoneFeatureChecked) {
-      if (_isPhonePermissionGranted && _hasTelephoneFeature) {
+      if (isPhonePermissionGranted && hasTelephoneFeature) {
         NativeMethods().startPhoneCall(number);
       } else {
         NativeMethods().launchDialerApp(number);
