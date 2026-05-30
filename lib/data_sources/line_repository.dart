@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import '../constants/keys.dart';
 import '../models/interfaces/data_repository.dart';
 import '../models/item.dart';
@@ -14,7 +16,10 @@ class LineRepository implements DataRepository {
     for (var data in favLineData) {
       var parts = data.split('|');
       if (parts.length >= 2) {
-        favItems.add(Item(data, parts[1], null));
+        final avatarBase64 = SharedPrefs.getString(keyLineAvatarPrefix + data);
+        final avatarBytes =
+            avatarBase64 != null ? base64Decode(avatarBase64) : null;
+        favItems.add(Item(data, parts[1], avatarBytes));
       }
     }
     return favItems;
@@ -29,5 +34,13 @@ class LineRepository implements DataRepository {
     var favLineData = SharedPrefs.getList(keyFavLine);
     favLineData.add('$id|$name');
     SharedPrefs.setList(keyFavLine, favLineData);
+  }
+
+  void setLineAvatar(String lineId, Uint8List bytes) {
+    SharedPrefs.setString(keyLineAvatarPrefix + lineId, base64Encode(bytes));
+  }
+
+  void removeLineAvatar(String lineId) {
+    SharedPrefs.removeKey(keyLineAvatarPrefix + lineId);
   }
 }

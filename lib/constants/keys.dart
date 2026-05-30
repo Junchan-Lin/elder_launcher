@@ -5,3 +5,4 @@ const keyDeprecatedFavApps = 'key_favorites';
 const keyIsFirstRun = 'key_is_first_run';
 const keySelectedTheme = 'key_selected_theme';
 const keyIsLocked = 'key_is_locked';
+const keyLineAvatarPrefix = 'line_avatar_';
