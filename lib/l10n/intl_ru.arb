@@ -22,5 +22,6 @@
     "dlgAppsReload": "Перезагрузить список программы",
     "dlgContactsAddRemove": "Добавить/удалять контакты",
     "dlgContactsReorder": "Изменение порядка контакты",
-    "dlgContactsReload": "Перезагрузить список контактов"
+    "dlgContactsReload": "Перезагрузить список контактов",
+    "dlgLineReload": "Обновить контакты Line"
 }

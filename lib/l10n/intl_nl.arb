@@ -22,5 +22,6 @@
     "dlgAppsReload": "App lijst opnieuw laden",
     "dlgContactsAddRemove": "Toevoegen/verwijderen contacten",
     "dlgContactsReorder": "Contacten sorteren",
-    "dlgContactsReload": "Contacten laden"
+    "dlgContactsReload": "Contacten laden",
+    "dlgLineReload": "Line-contacten opnieuw laden"
 }

@@ -22,5 +22,6 @@
     "dlgAppsReload": "App Liste neu laden",
     "dlgContactsAddRemove": "Kontakte hinzufügen/entfernen",
     "dlgContactsReorder": "Kontakte neu anordnen",
-    "dlgContactsReload": "Kontaktliste neu laden"
+    "dlgContactsReload": "Kontaktliste neu laden",
+    "dlgLineReload": "Line-Kontakte neu laden"
 }

@@ -23,6 +23,7 @@
     "dlgContactsAddRemove": "Add/Remove Contacts",
     "dlgContactsReorder": "Reorder Contacts",
     "dlgContactsReload": "Reload Contacts",
+    "dlgLineReload": "Reload Line Contacts",
     "Line": "Line",
     "btnAddFavLine": "Add Line Contact",
     "dlgLineAddRemove": "Add/Remove Line Contacts",

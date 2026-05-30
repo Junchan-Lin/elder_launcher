@@ -23,6 +23,7 @@
     "dlgContactsAddRemove": "新增/移除聯絡人",
     "dlgContactsReorder": "重新排序聯絡人",
     "dlgContactsReload": "重新載入聯絡人",
+    "dlgLineReload": "重新載入 Line 聯絡人",
     "Line": "Line",
     "btnAddFavLine": "新增 Line 聯絡人",
     "dlgLineAddRemove": "新增/移除 Line 聯絡人",

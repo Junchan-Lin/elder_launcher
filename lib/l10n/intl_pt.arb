@@ -22,5 +22,6 @@
     "dlgAppsReload": "Recarregar lista de aplicativos",
     "dlgContactsAddRemove": "Adicionar/Remover Contatos",
     "dlgContactsReorder": "Reordenar Contatos",
-    "dlgContactsReload": "Recarregar lista de contatos"
+    "dlgContactsReload": "Recarregar lista de contatos",
+    "dlgLineReload": "Recarregar contatos do Line"
 }

@@ -78,7 +78,7 @@ Future EditDialog(BuildContext context, EditMode editMode) {
                   ? S.of(context).dlgAppsReload
                   : editMode == EditMode.contacts
                       ? S.of(context).dlgContactsReload
-                      : S.of(context).dlgContactsReload, // Reuse string
+                      : S.of(context).dlgLineReload,
               style: TextStyles.dialogAction,
             ),
           ),

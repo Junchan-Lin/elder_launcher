@@ -22,5 +22,6 @@
     "dlgAppsReload": "Znovu načíst Seznam Aplikací",
     "dlgContactsAddRemove": "Přidat/Odebrat Kontakty",
     "dlgContactsReorder": "Přeuspořádat Kontakty",
-    "dlgContactsReload": "Znovu načíst Kontakty"
+    "dlgContactsReload": "Znovu načíst Kontakty",
+    "dlgLineReload": "Znovu načíst kontakty Line"
 }

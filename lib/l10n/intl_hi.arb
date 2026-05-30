@@ -22,5 +22,6 @@
     "dlgAppsReload": "एप्लिकेशन सूची ताज़ा करें",
     "dlgContactsAddRemove": "संपर्क जोड़ें/निकालें",
     "dlgContactsReorder": "व्यवस्थित करें संपर्क",
-    "dlgContactsReload": "संपर्क सूची ताज़ा करें"
+    "dlgContactsReload": "संपर्क सूची ताज़ा करें",
+    "dlgLineReload": "Line संपर्क पुनः लोड करें"
 }

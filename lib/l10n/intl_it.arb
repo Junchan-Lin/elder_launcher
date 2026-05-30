@@ -21,5 +21,6 @@
     "dlgAppsReload": "Ricarica la lista delle app",
     "dlgContactsAddRemove": "Aggiungi/rimuovi contatti",
     "dlgContactsReorder": "Riorganizza i contatti",
-    "dlgContactsReload": "Ricarica la lista dei contatti"
+    "dlgContactsReload": "Ricarica la lista dei contatti",
+    "dlgLineReload": "Ricarica contatti Line"
 }
