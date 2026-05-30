@@ -14,9 +14,11 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_tts: ^4.0.0
   font_awesome_flutter: ^10.7.0
   image_picker: ^1.1.2
   intl: ^0.20.2
+  lunar: ^1.7.8
   permission_handler: ^11.3.1
   provider: ^6.1.2
   shared_preferences: 2.2.2
