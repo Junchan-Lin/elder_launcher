@@ -51,7 +51,11 @@ class ContactsTab extends StatelessWidget {
                     contactProvider.isPhonePermissionChecked &&
                     contactProvider.isPhonePermissionGranted) ...[
                   // Show Favourite Contacts
-                  FavGridView(contactProvider.favContacts, openContactDialog)
+                  FavGridView(
+                    contactProvider.favContacts,
+                    openContactDialog,
+                    circular: true,
+                  )
                 ] else if (contactProvider.isFavListLoaded &&
                     contactProvider.favContacts.isNotEmpty &&
                     contactProvider.isPhonePermissionChecked &&
@@ -67,7 +71,11 @@ class ContactsTab extends StatelessWidget {
                         Icons.phone,
                         requestPhonePermission),
                   ),
-                  FavGridView(contactProvider.favContacts, openContactDialog)
+                  FavGridView(
+                    contactProvider.favContacts,
+                    openContactDialog,
+                    circular: true,
+                  )
                 ] else if (contactProvider.isFavListLoaded &&
                     contactProvider.favContacts.isEmpty) ...[
                   // Show Add Favourites Prompt
