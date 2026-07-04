@@ -42,3 +42,6 @@ android/key.*
 #IDE
 .vscode/
 .idea/
+
+# Git worktrees
+.worktrees/
