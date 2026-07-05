@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show Color;
 
 /// Data class used for storing app or contact info.
 @immutable
@@ -9,7 +10,10 @@ class Item {
   final String name;
   final Uint8List? icon;
 
-  const Item(this.id, this.name, this.icon);
+  /// Fallback circle-avatar background colour, used when [icon] is null.
+  final Color? avatarColor;
+
+  const Item(this.id, this.name, this.icon, {this.avatarColor});
 
   @override
   // ignore: type_annotate_public_apis, avoid_renaming_method_parameters

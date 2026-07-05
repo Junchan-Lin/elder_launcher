@@ -33,18 +33,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "btnAllContacts": MessageLookupByLibrary.simpleMessage("所有聯絡人"),
         "btnBackToHome": MessageLookupByLibrary.simpleMessage("返回首頁"),
         "btnCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "btnChooseColor": MessageLookupByLibrary.simpleMessage("選擇顏色"),
+        "btnChooseFromGallery": MessageLookupByLibrary.simpleMessage("從相簿選擇"),
         "btnGrantPermission": MessageLookupByLibrary.simpleMessage("授予權限"),
+        "btnSave": MessageLookupByLibrary.simpleMessage("儲存"),
         "btnSetDefaultLauncher": MessageLookupByLibrary.simpleMessage("設為預設桌面"),
+        "btnTakePhoto": MessageLookupByLibrary.simpleMessage("拍照"),
         "dlgAddLineTitle": MessageLookupByLibrary.simpleMessage("新增 Line 聯絡人"),
         "dlgAppsAddRemove": MessageLookupByLibrary.simpleMessage("新增/移除應用程式"),
         "dlgAppsReload": MessageLookupByLibrary.simpleMessage("重新載入應用程式列表"),
         "dlgAppsReorder": MessageLookupByLibrary.simpleMessage("重新排序應用程式"),
         "dlgCall": MessageLookupByLibrary.simpleMessage("撥打"),
         "dlgCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "dlgChooseColorTitle": MessageLookupByLibrary.simpleMessage("選擇顏色"),
         "dlgContactsAddRemove":
             MessageLookupByLibrary.simpleMessage("新增/移除聯絡人"),
         "dlgContactsReload": MessageLookupByLibrary.simpleMessage("重新載入聯絡人"),
         "dlgContactsReorder": MessageLookupByLibrary.simpleMessage("重新排序聯絡人"),
+        "dlgEditLineTitle": MessageLookupByLibrary.simpleMessage("編輯 Line 聯絡人"),
         "dlgEditTitle": MessageLookupByLibrary.simpleMessage("編輯常用項目"),
         "dlgLineAddRemove":
             MessageLookupByLibrary.simpleMessage("新增/移除 Line 聯絡人"),
@@ -53,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dlgOpenSettings": MessageLookupByLibrary.simpleMessage("開啟設定"),
         "hintLineId": MessageLookupByLibrary.simpleMessage("Line ID"),
         "hintLineName": MessageLookupByLibrary.simpleMessage("名稱"),
+        "msgAvatarPickFailed":
+            MessageLookupByLibrary.simpleMessage("無法取得照片，請再試一次。"),
         "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
             "若要在此畫面新增常用聯絡人，請允許此應用程式存取您的聯絡人。"),
         "msgNoData": MessageLookupByLibrary.simpleMessage("暫無資料。請在幾秒後重試。"),

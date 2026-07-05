@@ -6,3 +6,5 @@ const keyIsFirstRun = 'key_is_first_run';
 const keySelectedTheme = 'key_selected_theme';
 const keyIsLocked = 'key_is_locked';
 const keyLineAvatarPrefix = 'line_avatar_';
+const keyLineColorPrefix = 'line_color_';
+const keyContactColorPrefix = 'contact_color_';

@@ -1,4 +1,5 @@
 import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter/material.dart' show Color;
 import '../constants/keys.dart';
 import '../models/interfaces/data_repository.dart';
 import '../models/item.dart' as item;
@@ -26,6 +27,21 @@ class ContactRepository implements DataRepository {
   @override
   void setFavItems(List<String> favNumbers) {
     SharedPrefs.setList(keyFavContacts, favNumbers);
+  }
+
+  void setContactColor(String contactId, Color color) {
+    SharedPrefs.setString(
+        keyContactColorPrefix + contactId, color.value.toString());
+  }
+
+  Color? getContactColor(String contactId) {
+    final colorString =
+        SharedPrefs.getString(keyContactColorPrefix + contactId);
+    return colorString != null ? Color(int.parse(colorString)) : null;
+  }
+
+  void removeContactColor(String contactId) {
+    SharedPrefs.removeKey(keyContactColorPrefix + contactId);
   }
 
   // TODO: Performance optimization
@@ -64,11 +80,17 @@ class ContactRepository implements DataRepository {
   }
 
   item.Item _toItem(String number, Iterable<Contact> contacts) {
+    final avatarColor = getContactColor(number);
     if (contacts.first.displayName != null) {
       return item.Item(
-          number, contacts.first.displayName!, contacts.first.avatar);
+        number,
+        contacts.first.displayName!,
+        contacts.first.avatar,
+        avatarColor: avatarColor,
+      );
     } else {
-      return item.Item(number, number, contacts.first.avatar);
+      return item.Item(number, number, contacts.first.avatar,
+          avatarColor: avatarColor);
     }
   }
 }

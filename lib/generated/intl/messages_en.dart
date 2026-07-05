@@ -36,10 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "btnAllContacts": MessageLookupByLibrary.simpleMessage("All Contacts"),
         "btnBackToHome": MessageLookupByLibrary.simpleMessage("Back to Home"),
         "btnCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "btnChooseColor": MessageLookupByLibrary.simpleMessage("Choose Colour"),
+        "btnChooseFromGallery":
+            MessageLookupByLibrary.simpleMessage("Choose from Gallery"),
         "btnGrantPermission":
             MessageLookupByLibrary.simpleMessage("Grant Permission"),
+        "btnSave": MessageLookupByLibrary.simpleMessage("Save"),
         "btnSetDefaultLauncher":
             MessageLookupByLibrary.simpleMessage("Set as Default"),
+        "btnTakePhoto": MessageLookupByLibrary.simpleMessage("Take Photo"),
         "dlgAddLineTitle":
             MessageLookupByLibrary.simpleMessage("Add Line Contact"),
         "dlgAppsAddRemove":
@@ -49,12 +54,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "dlgAppsReorder": MessageLookupByLibrary.simpleMessage("Reorder Apps"),
         "dlgCall": MessageLookupByLibrary.simpleMessage("Call"),
         "dlgCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "dlgChooseColorTitle":
+            MessageLookupByLibrary.simpleMessage("Choose a Colour"),
         "dlgContactsAddRemove":
             MessageLookupByLibrary.simpleMessage("Add/Remove Contacts"),
         "dlgContactsReload":
             MessageLookupByLibrary.simpleMessage("Reload Contacts"),
         "dlgContactsReorder":
             MessageLookupByLibrary.simpleMessage("Reorder Contacts"),
+        "dlgEditLineTitle":
+            MessageLookupByLibrary.simpleMessage("Edit Line Contact"),
         "dlgEditTitle": MessageLookupByLibrary.simpleMessage("Edit Favourites"),
         "dlgLineAddRemove":
             MessageLookupByLibrary.simpleMessage("Add/Remove Line Contacts"),
@@ -66,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Open Settings"),
         "hintLineId": MessageLookupByLibrary.simpleMessage("Line ID"),
         "hintLineName": MessageLookupByLibrary.simpleMessage("Name"),
+        "msgAvatarPickFailed": MessageLookupByLibrary.simpleMessage(
+            "Couldn\'t get the photo. Please try again."),
         "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
             "To add favourite contacts to this screen, allow this app access to your contacts."),
         "msgNoData": MessageLookupByLibrary.simpleMessage(

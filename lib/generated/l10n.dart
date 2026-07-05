@@ -399,6 +399,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit Line Contact`
+  String get dlgEditLineTitle {
+    return Intl.message(
+      'Edit Line Contact',
+      name: 'dlgEditLineTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get btnSave {
+    return Intl.message(
+      'Save',
+      name: 'btnSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take Photo`
+  String get btnTakePhoto {
+    return Intl.message(
+      'Take Photo',
+      name: 'btnTakePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose from Gallery`
+  String get btnChooseFromGallery {
+    return Intl.message(
+      'Choose from Gallery',
+      name: 'btnChooseFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Colour`
+  String get btnChooseColor {
+    return Intl.message(
+      'Choose Colour',
+      name: 'btnChooseColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose a Colour`
+  String get dlgChooseColorTitle {
+    return Intl.message(
+      'Choose a Colour',
+      name: 'dlgChooseColorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Couldn't get the photo. Please try again.`
+  String get msgAvatarPickFailed {
+    return Intl.message(
+      'Couldn\'t get the photo. Please try again.',
+      name: 'msgAvatarPickFailed',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show Color;
 import 'package:permission_handler/permission_handler.dart';
 import '../data_sources/contact_repository.dart';
 import '../models/item.dart';
@@ -134,6 +135,16 @@ class ContactProvider extends ChangeNotifier {
 
   Future<void> saveFavContacts(List<String> newFavContacts) async {
     _repository.setFavItems(newFavContacts);
+    _loadFavItems();
+  }
+
+  Future<void> setContactColor(String contactId, Color color) async {
+    _repository.setContactColor(contactId, color);
+    _loadFavItems();
+  }
+
+  Future<void> removeContactColor(String contactId) async {
+    _repository.removeContactColor(contactId);
     _loadFavItems();
   }
 }

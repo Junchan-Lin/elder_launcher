@@ -33,5 +33,12 @@
     "hintLineId": "Line ID",
     "hintLineName": "Name",
     "btnCancel": "Cancel",
-    "btnAdd": "Add"
+    "btnAdd": "Add",
+    "dlgEditLineTitle": "Edit Line Contact",
+    "btnSave": "Save",
+    "btnTakePhoto": "Take Photo",
+    "btnChooseFromGallery": "Choose from Gallery",
+    "btnChooseColor": "Choose Colour",
+    "dlgChooseColorTitle": "Choose a Colour",
+    "msgAvatarPickFailed": "Couldn't get the photo. Please try again."
 }
