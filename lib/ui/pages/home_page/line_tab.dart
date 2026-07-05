@@ -114,7 +114,7 @@ class LineTab extends StatelessWidget {
                   GestureDetector(
                     onTap: () async {
                       final result = await _pickAvatarSource(sbContext);
-                      if (result != null) {
+                      if (result != null && sbContext.mounted) {
                         setState(() {
                           selectedImageBytes = result.bytes;
                           selectedColor = result.color;
