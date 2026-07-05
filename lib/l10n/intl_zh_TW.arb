@@ -33,5 +33,11 @@
     "hintLineId": "Line ID",
     "hintLineName": "名稱",
     "btnCancel": "取消",
-    "btnAdd": "新增"
+    "btnAdd": "新增",
+    "dlgEditLineTitle": "編輯 Line 聯絡人",
+    "btnSave": "儲存",
+    "btnTakePhoto": "拍照",
+    "btnChooseFromGallery": "從相簿選擇",
+    "btnChooseColor": "選擇顏色",
+    "dlgChooseColorTitle": "選擇顏色"
 }

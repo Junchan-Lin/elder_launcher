@@ -22,49 +22,66 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Apps": MessageLookupByLibrary.simpleMessage("программы"),
-        "Contacts": MessageLookupByLibrary.simpleMessage("контакты"),
-        "btnAddFavApps":
-            MessageLookupByLibrary.simpleMessage("Добавить любимые программы"),
-        "btnAddFavContacts":
-            MessageLookupByLibrary.simpleMessage("Добавить избранные контакты"),
-        "btnAllApps": MessageLookupByLibrary.simpleMessage("Все программы"),
-        "btnAllContacts": MessageLookupByLibrary.simpleMessage("Все контакты"),
-        "btnBackToHome":
-            MessageLookupByLibrary.simpleMessage("Вернуться домой"),
-        "btnGrantPermission":
-            MessageLookupByLibrary.simpleMessage("Предоставить разрешение"),
-        "btnSetDefaultLauncher":
-            MessageLookupByLibrary.simpleMessage("По умолчанию"),
-        "dlgAppsAddRemove":
-            MessageLookupByLibrary.simpleMessage("Добавить/удалять программы"),
-        "dlgAppsReload": MessageLookupByLibrary.simpleMessage(
-            "Перезагрузить список программы"),
-        "dlgAppsReorder":
-            MessageLookupByLibrary.simpleMessage("Изменение порядка программы"),
-        "dlgCall": MessageLookupByLibrary.simpleMessage("звонок"),
-        "dlgCancel": MessageLookupByLibrary.simpleMessage("Отмена"),
-        "dlgContactsAddRemove":
-            MessageLookupByLibrary.simpleMessage("Добавить/удалять контакты"),
-        "dlgContactsReload": MessageLookupByLibrary.simpleMessage(
-            "Перезагрузить список контактов"),
-        "dlgContactsReorder":
-            MessageLookupByLibrary.simpleMessage("Изменение порядка контакты"),
-        "dlgEditTitle":
-            MessageLookupByLibrary.simpleMessage("Редактировать избранное"),
-        "dlgLineReload":
-            MessageLookupByLibrary.simpleMessage("Обновить контакты Line"),
-        "dlgOpenSettings":
-            MessageLookupByLibrary.simpleMessage("Изменить настройки"),
-        "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
-            "Чтобы добавить избранные контакты на этот экран, разрешите этому приложению доступ к вашим контактам."),
-        "msgNoData": MessageLookupByLibrary.simpleMessage(
-            "Данные недоступны. Попробуйте еще раз через несколько секунд."),
-        "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
-            "Вы не добавили ни одного избранного"),
-        "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
-            "Чтобы сделать звонки проще, позвольте этому приложению начинать телефонные звонки для вас."),
-        "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
-            "Открывайте приложения и контакты быстрее, сделав Elder Launcher домашним приложением.")
-      };
+    "Apps": MessageLookupByLibrary.simpleMessage("программы"),
+    "Contacts": MessageLookupByLibrary.simpleMessage("контакты"),
+    "btnAddFavApps": MessageLookupByLibrary.simpleMessage(
+      "Добавить любимые программы",
+    ),
+    "btnAddFavContacts": MessageLookupByLibrary.simpleMessage(
+      "Добавить избранные контакты",
+    ),
+    "btnAllApps": MessageLookupByLibrary.simpleMessage("Все программы"),
+    "btnAllContacts": MessageLookupByLibrary.simpleMessage("Все контакты"),
+    "btnBackToHome": MessageLookupByLibrary.simpleMessage("Вернуться домой"),
+    "btnGrantPermission": MessageLookupByLibrary.simpleMessage(
+      "Предоставить разрешение",
+    ),
+    "btnSetDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "По умолчанию",
+    ),
+    "dlgAppsAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Добавить/удалять программы",
+    ),
+    "dlgAppsReload": MessageLookupByLibrary.simpleMessage(
+      "Перезагрузить список программы",
+    ),
+    "dlgAppsReorder": MessageLookupByLibrary.simpleMessage(
+      "Изменение порядка программы",
+    ),
+    "dlgCall": MessageLookupByLibrary.simpleMessage("звонок"),
+    "dlgCancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+    "dlgContactsAddRemove": MessageLookupByLibrary.simpleMessage(
+      "Добавить/удалять контакты",
+    ),
+    "dlgContactsReload": MessageLookupByLibrary.simpleMessage(
+      "Перезагрузить список контактов",
+    ),
+    "dlgContactsReorder": MessageLookupByLibrary.simpleMessage(
+      "Изменение порядка контакты",
+    ),
+    "dlgEditTitle": MessageLookupByLibrary.simpleMessage(
+      "Редактировать избранное",
+    ),
+    "dlgLineReload": MessageLookupByLibrary.simpleMessage(
+      "Обновить контакты Line",
+    ),
+    "dlgOpenSettings": MessageLookupByLibrary.simpleMessage(
+      "Изменить настройки",
+    ),
+    "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
+      "Чтобы добавить избранные контакты на этот экран, разрешите этому приложению доступ к вашим контактам.",
+    ),
+    "msgNoData": MessageLookupByLibrary.simpleMessage(
+      "Данные недоступны. Попробуйте еще раз через несколько секунд.",
+    ),
+    "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
+      "Вы не добавили ни одного избранного",
+    ),
+    "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
+      "Чтобы сделать звонки проще, позвольте этому приложению начинать телефонные звонки для вас.",
+    ),
+    "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
+      "Открывайте приложения и контакты быстрее, сделав Elder Launcher домашним приложением.",
+    ),
+  };
 }
