@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show Color;
 import 'package:url_launcher/url_launcher.dart';
 import '../data_sources/line_repository.dart';
 import '../models/item.dart';
@@ -54,11 +55,34 @@ class LineProvider extends ChangeNotifier {
   }
 
   Future<void> addLineContactWithAvatar(
-      String id, String name, Uint8List? avatarBytes) async {
+    String id,
+    String name,
+    Uint8List? avatarBytes, {
+    Color? color,
+  }) async {
     await _repository.addLineContact(id, name);
     if (avatarBytes != null) {
       _repository.setLineAvatar('$id|$name', avatarBytes);
+    } else if (color != null) {
+      _repository.setLineColor('$id|$name', color);
     }
+    _loadFavItems();
+  }
+
+  Future<void> editLineContact(
+    Item existingItem,
+    String newId,
+    String newName, {
+    Uint8List? avatarBytes,
+    Color? avatarColor,
+  }) async {
+    await _repository.updateLineContact(
+      existingItem.id,
+      newId,
+      newName,
+      avatarBytes: avatarBytes,
+      avatarColor: avatarColor,
+    );
     _loadFavItems();
   }
 }
