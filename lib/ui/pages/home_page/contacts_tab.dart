@@ -40,7 +40,7 @@ class ContactsTab extends StatelessWidget {
           ),
         ),
       ).then((color) {
-        if (color != null) {
+        if (color != null && context.mounted) {
           context.read<ContactProvider>().setContactColor(contact.id, color);
         }
       });
