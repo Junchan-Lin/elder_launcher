@@ -1234,6 +1234,8 @@ git commit -m "feat: LINE tab 支援長按編輯、拍照頭像與選色"
 **Files:**
 - Modify: `lib/ui/pages/home_page/contacts_tab.dart`
 
+> **注意（實作時發現並修正）：** `openColorPickerDialog` 的 `.then((color) { ... })` callback 在 dialog 關閉後（跨過一個 async gap）才存取外層 `context`，`flutter analyze` 會標記 `use_build_context_synchronously`；下方程式碼已經補上 `context.mounted` 檢查，跟 Task 9 `LineTab` 的 `setState` mounted 檢查是同一類問題的修正。
+
 - [ ] **Step 1: 用以下內容整份取代 `lib/ui/pages/home_page/contacts_tab.dart`**
 
 ```dart
@@ -1279,7 +1281,7 @@ class ContactsTab extends StatelessWidget {
           ),
         ),
       ).then((color) {
-        if (color != null) {
+        if (color != null && context.mounted) {
           context.read<ContactProvider>().setContactColor(contact.id, color);
         }
       });
