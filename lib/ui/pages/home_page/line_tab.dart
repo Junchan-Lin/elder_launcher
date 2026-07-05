@@ -8,7 +8,6 @@ import '../../../models/item.dart';
 import '../../../providers/lock_provider.dart';
 import '../../../ui/common/buttons.dart';
 import '../../../ui/common/color_picker_grid.dart';
-import '../../../ui/common/info_action_widget.dart';
 import '../../../ui/common/loading_widget.dart';
 import '../../../ui/common/lock_gated_empty_prompt.dart';
 import '../../../ui/pages/home_page/fav_grid_view.dart';
