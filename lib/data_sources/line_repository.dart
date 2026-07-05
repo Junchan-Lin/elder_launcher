@@ -52,6 +52,8 @@ class LineRepository implements DataRepository {
     Uint8List? avatarBytes,
     Color? avatarColor,
   }) async {
+    assert(avatarBytes == null || avatarColor == null,
+        'avatarBytes and avatarColor are mutually exclusive');
     final newData = '$newId|$newName';
 
     SharedPrefs.removeKey(keyLineAvatarPrefix + oldData);
