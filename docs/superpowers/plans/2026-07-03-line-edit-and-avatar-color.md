@@ -168,7 +168,9 @@ git commit -m "feat: 新增編輯 LINE 聯絡人與選色相關的 l10n 字串"
 
 - [ ] **Step 1: 在 `test/data_sources/line_repository_test.dart` 新增測試（寫在檔案最後、`main()` 的 `}` 之前）**
 
-先在檔案最上方的 import 區塊加入 `import 'package:flutter/material.dart';`（測試要用到 `Colors.red`/`Colors.blue`）：
+先在檔案最上方的 import 區塊加入 `import 'package:flutter/material.dart';`（測試要用到 `Color`）：
+
+> **注意（實作時發現並修正）：** 測試裡的顏色請用 `avatarColorPalette` 裡的實際色值（`const Color(0xFFE53935)`／`const Color(0xFF3949AB)`），**不要**用 `Colors.red`/`Colors.blue` 這類 `MaterialColor` 具名色。現在的 Flutter SDK（`Color.operator==`）會比較 `runtimeType`，`MaterialColor`（`Colors.red`）跟從 `int` 重建出來的 `Color`（`getFavItems()`/`getContactColor()` 內部就是這樣重建的）就算色值相同也不會 `==`，會讓斷言失敗。production code 一律只用 plain `Color` 常數（`lib/ui/colors.dart` 裡沒有任何 `MaterialColor`），測試也要跟著用 plain `Color`，這樣才符合實際使用情境。
 
 ```dart
 import 'dart:convert';
@@ -186,14 +188,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 ```dart
   group('顏色設定', () {
     test('setLineColor 儲存後 getFavItems 讀取到顏色', () async {
-      LineRepository().setLineColor('user123|Alice', Colors.red);
+      LineRepository().setLineColor('user123|Alice', const Color(0xFFE53935));
 
       final items = await LineRepository().getFavItems();
-      expect(items[0].avatarColor, equals(Colors.red));
+      expect(items[0].avatarColor, equals(const Color(0xFFE53935)));
     });
 
     test('removeLineColor 清除後 getFavItems 顏色為 null', () async {
-      LineRepository().setLineColor('user123|Alice', Colors.red);
+      LineRepository().setLineColor('user123|Alice', const Color(0xFFE53935));
       LineRepository().removeLineColor('user123|Alice');
 
       final items = await LineRepository().getFavItems();
@@ -201,7 +203,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     });
 
     test('setLineAvatar 會清除同一筆資料原本設定的顏色', () async {
-      LineRepository().setLineColor('user123|Alice', Colors.red);
+      LineRepository().setLineColor('user123|Alice', const Color(0xFFE53935));
       LineRepository().setLineAvatar(
           'user123|Alice', Uint8List.fromList([1, 2, 3]));
 
@@ -231,7 +233,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
     test('帶入新頭像時覆蓋資料並清除舊顏色', () async {
       SharedPrefs.setString(
-          keyLineColorPrefix + 'user123|Alice', Colors.red.value.toString());
+          keyLineColorPrefix + 'user123|Alice', const Color(0xFFE53935).value.toString());
       final fakeBytes = Uint8List.fromList([9, 9, 9]);
 
       await LineRepository().updateLineContact(
@@ -255,12 +257,12 @@ import 'package:shared_preferences/shared_preferences.dart';
         'user123|Alice',
         'user123',
         'Alice',
-        avatarColor: Colors.blue,
+        avatarColor: const Color(0xFF3949AB),
       );
 
       final items = await LineRepository().getFavItems();
       expect(items[0].icon, isNull);
-      expect(items[0].avatarColor, equals(Colors.blue));
+      expect(items[0].avatarColor, equals(const Color(0xFF3949AB)));
     });
 
     test('未帶入頭像或顏色時，兩者皆為 null', () async {
@@ -517,6 +519,8 @@ git commit -m "feat: LineProvider 新增 editLineContact，addLineContactWithAva
 
 現有 `test/data_sources/contact_repository_test.dart` 整份被註解掉（既有的 `contacts_service` mock 流程目前是停用狀態），顏色功能只依賴 `SharedPrefs`、跟 `ContactsService` 無關，所以另外開一個獨立、可以直接跑的測試檔，不去動原本停用的檔案。
 
+> **注意（Task 3 實作時發現並修正的同一個問題）：** 測試裡的顏色一律用 plain `Color` 常數（如 `const Color(0xFF3949AB)`），**不要**用 `Colors.blue` 這類 `MaterialColor` 具名色 —— 目前 Flutter SDK 的 `Color.operator==` 會比較 `runtimeType`，`getContactColor()` 用 `Color(int.parse(...))` 重建出來的一定是 plain `Color`，跟 `MaterialColor` 就算色值相同也不會 `==`，斷言會失敗。
+
 - [ ] **Step 1: 新增 `test/data_sources/contact_repository_color_test.dart`**
 
 ```dart
@@ -541,12 +545,13 @@ void main() {
   });
 
   test('setContactColor 後 getContactColor 讀取到相同顏色', () {
-    ContactRepository().setContactColor('1234', Colors.blue);
-    expect(ContactRepository().getContactColor('1234'), equals(Colors.blue));
+    ContactRepository().setContactColor('1234', const Color(0xFF3949AB));
+    expect(ContactRepository().getContactColor('1234'),
+        equals(const Color(0xFF3949AB)));
   });
 
   test('removeContactColor 清除後 getContactColor 回傳 null', () {
-    ContactRepository().setContactColor('1234', Colors.blue);
+    ContactRepository().setContactColor('1234', const Color(0xFF3949AB));
     ContactRepository().removeContactColor('1234');
     expect(ContactRepository().getContactColor('1234'), isNull);
   });
