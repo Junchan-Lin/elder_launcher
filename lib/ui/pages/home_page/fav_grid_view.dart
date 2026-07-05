@@ -8,6 +8,7 @@ import '../../../ui/theme.dart';
 class FavGridView extends StatelessWidget {
   final List<Item> favItems;
   final VoidItemFunction itemOnClickAction;
+  final VoidItemFunction? itemOnLongPressAction;
   final bool circular;
   final bool showLineBadge;
 
@@ -15,6 +16,7 @@ class FavGridView extends StatelessWidget {
     this.favItems,
     this.itemOnClickAction, {
     super.key,
+    this.itemOnLongPressAction,
     this.circular = false,
     this.showLineBadge = false,
   });
@@ -32,6 +34,7 @@ class FavGridView extends StatelessWidget {
           return FavItemCard(
             item: item,
             itemOnClickAction: itemOnClickAction,
+            itemOnLongPressAction: itemOnLongPressAction,
             itemName: itemName,
             circular: circular,
             showLineBadge: showLineBadge,
@@ -48,12 +51,14 @@ class FavItemCard extends StatelessWidget {
     required this.item,
     required this.itemOnClickAction,
     required this.itemName,
+    this.itemOnLongPressAction,
     this.circular = false,
     this.showLineBadge = false,
   });
 
   final Item item;
   final VoidItemFunction itemOnClickAction;
+  final VoidItemFunction? itemOnLongPressAction;
   final AutoSizeGroup itemName;
   final bool circular;
   final bool showLineBadge;
@@ -64,13 +69,25 @@ class FavItemCard extends StatelessWidget {
 
     if (circular) {
       final hasPhoto = item.icon?.isNotEmpty ?? false;
+      final hasColor = !hasPhoto && item.avatarColor != null;
       iconWidget = Stack(
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
             radius: 35,
+            backgroundColor: hasColor ? item.avatarColor : null,
             backgroundImage: hasPhoto ? MemoryImage(item.icon!) : null,
-            child: hasPhoto ? null : const Icon(Icons.person, size: 35),
+            child: hasPhoto
+                ? null
+                : hasColor
+                    ? Text(
+                        item.name.isNotEmpty
+                            ? item.name[0].toUpperCase()
+                            : '?',
+                        style:
+                            TextStyles.cardTitle.copyWith(color: Colors.white),
+                      )
+                    : const Icon(Icons.person, size: 35),
           ),
           if (showLineBadge)
             const FaIcon(
@@ -95,6 +112,9 @@ class FavItemCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.withAlpha(50),
         onTap: () => itemOnClickAction(item),
+        onLongPress: itemOnLongPressAction != null
+            ? () => itemOnLongPressAction!(item)
+            : null,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
