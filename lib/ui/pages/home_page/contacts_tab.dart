@@ -9,6 +9,7 @@ import '../../../ui/common/buttons.dart';
 import '../../../ui/common/color_picker_grid.dart';
 import '../../../ui/common/info_action_widget.dart';
 import '../../../ui/common/loading_widget.dart';
+import '../../../ui/common/lock_gated_empty_prompt.dart';
 import '../../../ui/pages/home_page/call_dialog.dart';
 import '../../../ui/pages/home_page/fav_grid_view.dart';
 import '../../common/action_panel.dart';
@@ -103,13 +104,11 @@ class ContactsTab extends StatelessWidget {
                     )
                   ] else if (contactProvider.isFavListLoaded &&
                       contactProvider.favContacts.isEmpty) ...[
-                    // Show Add Favourites Prompt
-                    Expanded(
-                      child: InfoActionWidget.add(
-                        message: S.of(context).msgNoFavourites,
-                        buttonLabel: S.of(context).btnAddFavContacts,
-                        buttonOnClickAction: openEditScreen,
-                      ),
+                    // Show Add Favourites Prompt (only when unlocked)
+                    LockGatedEmptyPrompt(
+                      message: S.of(context).msgNoFavourites,
+                      buttonLabel: S.of(context).btnAddFavContacts,
+                      buttonOnClickAction: openEditScreen,
                     ),
                   ] else if (contactProvider.isContactsPermissionChecked &&
                       !contactProvider.isContactsPermissionGranted) ...[
