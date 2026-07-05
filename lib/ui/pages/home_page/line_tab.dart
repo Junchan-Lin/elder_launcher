@@ -29,12 +29,24 @@ class LineTab extends StatelessWidget {
               leading: const Icon(Icons.camera_alt, size: 32),
               title: Text(S.of(sheetContext).btnTakePhoto),
               onTap: () async {
-                final picked = await ImagePicker().pickImage(
-                  source: ImageSource.camera,
-                  maxWidth: 200,
-                  maxHeight: 200,
-                  imageQuality: 80,
-                );
+                final XFile? picked;
+                try {
+                  picked = await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                    maxWidth: 200,
+                    maxHeight: 200,
+                    imageQuality: 80,
+                  );
+                } catch (_) {
+                  if (sheetContext.mounted) {
+                    ScaffoldMessenger.of(sheetContext).showSnackBar(
+                      SnackBar(
+                          content:
+                              Text(S.of(sheetContext).msgAvatarPickFailed)),
+                    );
+                  }
+                  return;
+                }
                 final bytes = picked != null ? await picked.readAsBytes() : null;
                 final _AvatarPickResult? result =
                     bytes != null ? (bytes: bytes, color: null) : null;
@@ -47,12 +59,24 @@ class LineTab extends StatelessWidget {
               leading: const Icon(Icons.photo_library, size: 32),
               title: Text(S.of(sheetContext).btnChooseFromGallery),
               onTap: () async {
-                final picked = await ImagePicker().pickImage(
-                  source: ImageSource.gallery,
-                  maxWidth: 200,
-                  maxHeight: 200,
-                  imageQuality: 80,
-                );
+                final XFile? picked;
+                try {
+                  picked = await ImagePicker().pickImage(
+                    source: ImageSource.gallery,
+                    maxWidth: 200,
+                    maxHeight: 200,
+                    imageQuality: 80,
+                  );
+                } catch (_) {
+                  if (sheetContext.mounted) {
+                    ScaffoldMessenger.of(sheetContext).showSnackBar(
+                      SnackBar(
+                          content:
+                              Text(S.of(sheetContext).msgAvatarPickFailed)),
+                    );
+                  }
+                  return;
+                }
                 final bytes = picked != null ? await picked.readAsBytes() : null;
                 final _AvatarPickResult? result =
                     bytes != null ? (bytes: bytes, color: null) : null;

@@ -39,5 +39,6 @@
     "btnTakePhoto": "拍照",
     "btnChooseFromGallery": "從相簿選擇",
     "btnChooseColor": "選擇顏色",
-    "dlgChooseColorTitle": "選擇顏色"
+    "dlgChooseColorTitle": "選擇顏色",
+    "msgAvatarPickFailed": "無法取得照片，請再試一次。"
 }
