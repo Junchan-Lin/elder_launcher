@@ -23,8 +23,8 @@ const elderGrey = Color(0xFFAAAAAA);
 /* Avatar fallback palette (used when no photo is set) */
 const avatarColorPalette = <Color>[
   Color(0xFFE53935), // 紅
-  Color(0xFFFB8C00), // 橙
-  Color(0xFFF9A825), // 黃
+  Color(0xFFC86400), // 橙
+  Color(0xFFA67907), // 黃
   Color(0xFF43A047), // 綠
   elderTeal, // 品牌色（取代單純的藍）
   Color(0xFF3949AB), // 靛
