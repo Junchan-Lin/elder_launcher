@@ -173,12 +173,21 @@ class MainActivity: FlutterActivity() {
     }
 
     private fun pickAndBindWidget(result: MethodChannel.Result) {
+        if (pendingResult != null) {
+            result.error("ALREADY_IN_PROGRESS", "A widget pick/configure flow is already in progress", null)
+            return
+        }
         pendingResult = result
         val appWidgetId = appWidgetHost.allocateAppWidgetId()
         pendingAppWidgetId = appWidgetId
         val pickIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_PICK)
         pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET)
+        try {
+            startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            cancelPendingWidget()
+        }
     }
 
     private fun finishAddWidget(appWidgetId: Int) {
@@ -190,11 +199,7 @@ class MainActivity: FlutterActivity() {
             return
         }
         val density = resources.displayMetrics.densityDpi
-        val previewDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            info.loadPreviewImage(this, density) ?: info.loadIcon(this, density)
-        } else {
-            info.loadIcon(this, density)
-        }
+        val previewDrawable = info.loadPreviewImage(this, density) ?: info.loadIcon(this, density)
         val iconBytes = previewDrawable?.let { drawableToBytes(it) }
         pendingResult?.success(
             mapOf(
@@ -253,7 +258,12 @@ class MainActivity: FlutterActivity() {
                         val configIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE)
                         configIntent.component = info.configure
                         configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                        startActivityForResult(configIntent, REQUEST_CONFIGURE_APPWIDGET)
+                        try {
+                            startActivityForResult(configIntent, REQUEST_CONFIGURE_APPWIDGET)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            cancelPendingWidget()
+                        }
                     } else {
                         finishAddWidget(appWidgetId)
                     }
