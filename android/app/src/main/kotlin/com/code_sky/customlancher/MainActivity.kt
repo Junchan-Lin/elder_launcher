@@ -190,7 +190,11 @@ class MainActivity: FlutterActivity() {
             return
         }
         val density = resources.displayMetrics.densityDpi
-        val previewDrawable = info.loadPreviewImage(this, density) ?: info.loadIcon(this, density)
+        val previewDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            info.loadPreviewImage(this, density) ?: info.loadIcon(this, density)
+        } else {
+            info.loadIcon(this, density)
+        }
         val iconBytes = previewDrawable?.let { drawableToBytes(it) }
         pendingResult?.success(
             mapOf(
