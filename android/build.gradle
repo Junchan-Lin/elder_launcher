@@ -18,7 +18,13 @@ subprojects {
             if (project.android.namespace == null) {
                 project.android.namespace = "com.code_sky.${project.name.replace("-", "_")}"
             }
-            
+
+            // 1b. 對齊 compileSdkVersion，避免舊插件因 compileSdk 過低
+            // 而在 release 版 AAPT 資源合併時找不到新版 framework attr (例如 lStar)
+            if (project.name == 'contacts_service' || project.name == 'device_apps') {
+                project.android.compileSdkVersion 36
+            }
+
             // 2. 動態修復 Manifest (解決 Incorrect package 錯誤)
             // 為了不修改 pub-cache 原始檔案，我們產生一個暫存的修復版 Manifest
             if (project.name == 'contacts_service' || project.name == 'device_apps') {
