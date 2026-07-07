@@ -74,7 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "msgNoPhonePermission": MessageLookupByLibrary.simpleMessage(
       "為了更方便撥打電話，請允許此應用程式為您發起通話。",
     ),
-    "msgNoWidgets": MessageLookupByLibrary.simpleMessage("你還沒有新增任何小工具"),
+    "msgNoWidgets": MessageLookupByLibrary.simpleMessage("您尚未新增任何小工具"),
     "msgNotDefaultLauncher": MessageLookupByLibrary.simpleMessage(
       "將 Elder Launcher 設為預設桌面，可以更快速地開啟應用程式和聯絡人。",
     ),

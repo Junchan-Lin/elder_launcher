@@ -43,7 +43,7 @@
     "msgAvatarPickFailed": "無法取得照片，請再試一次。",
     "Widgets": "小工具",
     "btnAddWidget": "新增小工具",
-    "msgNoWidgets": "你還沒有新增任何小工具",
+    "msgNoWidgets": "您尚未新增任何小工具",
     "dlgWidgetsAddRemove": "新增/移除小工具",
     "dlgWidgetsReorder": "重新排序小工具",
     "dlgWidgetsReload": "重新載入小工具"
