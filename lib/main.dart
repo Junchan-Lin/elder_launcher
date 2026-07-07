@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Elder Launcher',
-        home: const DefaultTabController(length: 4, child: HomePage()),
+        home: const HomePage(),
         onGenerateRoute: generateRoute,
         localizationsDelegates: const [
           S.delegate,
