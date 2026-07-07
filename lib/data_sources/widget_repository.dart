@@ -40,6 +40,7 @@ class WidgetRepository implements DataRepository {
     SharedPrefs.setInt(keyWidgetHeightPrefix + appWidgetId, minHeight);
   }
 
+  /// 僅清除快取的 label/icon/height，不會將 id 從 keyFavWidgets 移除，需另外呼叫 setFavItems()。
   void removeWidgetData(String appWidgetId) {
     SharedPrefs.removeKey(keyWidgetLabelPrefix + appWidgetId);
     SharedPrefs.removeKey(keyWidgetIconPrefix + appWidgetId);

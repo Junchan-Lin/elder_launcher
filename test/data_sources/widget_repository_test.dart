@@ -58,6 +58,28 @@ void main() {
     expect(repository.getWidgetHeight('1'), 100);
   });
 
+  test('removeWidgetData 不會將 id 從 favourites 清單移除', () async {
+    final repository = WidgetRepository();
+    repository.addWidget('1', 'Clock', Uint8List.fromList([1, 2, 3]), 150);
+
+    repository.removeWidgetData('1');
+
+    final items = await repository.getFavItems();
+    expect(items.length, 1);
+    expect(items[0].id, '1');
+    expect(items[0].name, '');
+    expect(items[0].icon, isNull);
+  });
+
+  test('removeWidgetData 重複呼叫不會拋出例外', () async {
+    final repository = WidgetRepository();
+    repository.addWidget('1', 'Clock', Uint8List.fromList([1, 2, 3]), 150);
+
+    repository.removeWidgetData('1');
+
+    expect(() => repository.removeWidgetData('1'), returnsNormally);
+  });
+
   test('setFavItems 覆寫排序後的 id 清單', () async {
     final repository = WidgetRepository();
     repository.addWidget('1', 'Clock', null, 120);
