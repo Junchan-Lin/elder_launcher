@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
 import 'providers/app_provider.dart';
 import 'providers/contact_provider.dart';
+import 'data_sources/widget_repository.dart';
+import 'providers/widget_provider.dart';
 import 'providers/lock_provider.dart';
 import 'ui/pages/home_page/home_page.dart';
 import 'ui/router.dart';
@@ -33,12 +35,14 @@ class MyApp extends StatelessWidget {
             create: (_) => ContactProvider(ContactRepository())),
         ChangeNotifierProvider<LineProvider>(
             create: (_) => LineProvider(LineRepository())),
+        ChangeNotifierProvider<WidgetProvider>(
+            create: (_) => WidgetProvider(WidgetRepository())),
         ChangeNotifierProvider<LockProvider>(
             create: (_) => LockProvider()),
       ],
       child: MaterialApp(
         title: 'Elder Launcher',
-        home: const DefaultTabController(length: 3, child: HomePage()),
+        home: const DefaultTabController(length: 4, child: HomePage()),
         onGenerateRoute: generateRoute,
         localizationsDelegates: const [
           S.delegate,

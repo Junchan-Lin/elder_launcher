@@ -9,6 +9,7 @@ import '../../../providers/date_time_provider.dart';
 import '../../../ui/pages/home_page/apps_tab.dart';
 import '../../../ui/pages/home_page/contacts_tab.dart';
 import '../../../ui/pages/home_page/edit_dialog.dart';
+import '../../../ui/pages/home_page/widgets_tab.dart';
 import '../../../providers/lock_provider.dart';
 import '../../../ui/theme.dart';
 
@@ -26,8 +27,10 @@ class HomePage extends StatelessWidget {
         editMode = EditMode.apps;
       } else if (tabIndex == 1) {
         editMode = EditMode.contacts;
-      } else {
+      } else if (tabIndex == 2) {
         editMode = EditMode.line;
+      } else {
+        editMode = EditMode.widgets;
       }
 
       EditDialog(context, editMode);
@@ -176,13 +179,38 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Tab(
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),
+                              child: Icon(Icons.widgets),
+                            ),
+                            Flexible(
+                              child: AutoSizeText(
+                                S.of(context).Widgets,
+                                group: appBarTextSizeGroup,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 50),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ]),
                 ],
               ),
             ),
           ),
-          body: const TabBarView(
-              children: <Widget>[AppsTab(), ContactsTab(), LineTab()]),
+          body: const TabBarView(children: <Widget>[
+            AppsTab(),
+            ContactsTab(),
+            LineTab(),
+            WidgetsTab()
+          ]),
         ),
       ),
     );
