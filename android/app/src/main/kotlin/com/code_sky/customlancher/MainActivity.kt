@@ -33,9 +33,11 @@ class MainActivity: FlutterActivity() {
     private var pendingAppWidgetId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        // 必須在 super.onCreate() 之前初始化：super.onCreate() 會同步觸發
+        // configureFlutterEngine()，該函式已經需要用到 appWidgetHost/appWidgetManager。
         appWidgetManager = AppWidgetManager.getInstance(this)
         appWidgetHost = AppWidgetHost(this, APPWIDGET_HOST_ID)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
