@@ -29,6 +29,7 @@ class WidgetsTab extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         children: widgetProvider.favWidgets
                             .map((item) => Padding(
+                                  key: Key(item.id),
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 4),
                                   child: WidgetHostView(

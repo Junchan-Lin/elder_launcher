@@ -193,6 +193,7 @@ class MainActivity: FlutterActivity() {
     private fun finishAddWidget(appWidgetId: Int) {
         val info = appWidgetManager.getAppWidgetInfo(appWidgetId)
         if (info == null) {
+            appWidgetHost.deleteAppWidgetId(appWidgetId)
             pendingResult?.success(null)
             pendingResult = null
             pendingAppWidgetId = -1

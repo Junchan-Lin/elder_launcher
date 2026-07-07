@@ -28,6 +28,7 @@ class WidgetProvider extends ChangeNotifier {
         .where((id) => !validIds.contains(int.parse(id)))
         .toList();
     for (final id in staleIds) {
+      NativeMethods().deleteWidget(int.parse(id));
       _repository.removeWidgetData(id);
     }
 

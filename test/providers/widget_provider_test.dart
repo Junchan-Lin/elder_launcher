@@ -108,4 +108,31 @@ void main() {
     expect(SharedPrefs.getList(keyFavWidgets), ['1']);
     expect(SharedPrefs.getString('${keyWidgetLabelPrefix}2'), isNull);
   });
+
+  test('載入時偵測到來源 App 已移除的 widget，呼叫原生 deleteWidget 釋放資源', () async {
+    SharedPreferences.setMockInitialValues({
+      'flutter.$keyFavWidgets': ['1', '2'],
+      'flutter.${keyWidgetLabelPrefix}1': 'Clock',
+      'flutter.${keyWidgetLabelPrefix}2': 'Uninstalled Widget',
+    });
+    await SharedPrefs.init();
+
+    final deletedIds = <int>[];
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(widgetsChannel, (call) async {
+      if (call.method == 'filterValidWidgetIds') {
+        return [1];
+      }
+      if (call.method == 'deleteWidget') {
+        deletedIds.add(call.arguments['appWidgetId'] as int);
+      }
+      return null;
+    });
+
+    final provider = WidgetProvider(WidgetRepository());
+    await Future.delayed(Duration.zero);
+
+    expect(deletedIds, [2]);
+    expect(provider.favWidgets.map((e) => e.id), ['1']);
+  });
 }
