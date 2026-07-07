@@ -1,6 +1,7 @@
 const keyFavApps = 'key_favourites_apps';
 const keyFavContacts = 'key_favourite_contacts';
 const keyFavLine = 'key_favourite_line';
+const keyFavWidgets = 'key_favourite_widgets';
 const keyDeprecatedFavApps = 'key_favorites';
 const keyIsFirstRun = 'key_is_first_run';
 const keySelectedTheme = 'key_selected_theme';
@@ -8,3 +9,6 @@ const keyIsLocked = 'key_is_locked';
 const keyLineAvatarPrefix = 'line_avatar_';
 const keyLineColorPrefix = 'line_color_';
 const keyContactColorPrefix = 'contact_color_';
+const keyWidgetLabelPrefix = 'widget_label_';
+const keyWidgetIconPrefix = 'widget_icon_';
+const keyWidgetHeightPrefix = 'widget_height_';

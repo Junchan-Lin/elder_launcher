@@ -1,1 +1,1 @@
-enum EditMode { apps, contacts, line }
+enum EditMode { apps, contacts, line, widgets }
