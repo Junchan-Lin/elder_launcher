@@ -40,5 +40,11 @@
     "btnChooseFromGallery": "Choose from Gallery",
     "btnChooseColor": "Choose Colour",
     "dlgChooseColorTitle": "Choose a Colour",
-    "msgAvatarPickFailed": "Couldn't get the photo. Please try again."
+    "msgAvatarPickFailed": "Couldn't get the photo. Please try again.",
+    "Widgets": "Widgets",
+    "btnAddWidget": "Add Widget",
+    "msgNoWidgets": "You haven't added any widgets",
+    "dlgWidgetsAddRemove": "Add/Remove Widgets",
+    "dlgWidgetsReorder": "Reorder Widgets",
+    "dlgWidgetsReload": "Reload Widgets"
 }

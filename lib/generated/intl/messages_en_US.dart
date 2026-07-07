@@ -22,14 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "btnAddFavApps":
-            MessageLookupByLibrary.simpleMessage("Add Favorite Apps"),
-        "btnAddFavContacts":
-            MessageLookupByLibrary.simpleMessage("Add Favorite Contacts"),
-        "dlgEditTitle": MessageLookupByLibrary.simpleMessage("Edit Favorites"),
-        "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
-            "To add favorite contacts to this screen, allow this app access to your contacts."),
-        "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
-            "You haven\'t added any favorites")
-      };
+    "btnAddFavApps": MessageLookupByLibrary.simpleMessage("Add Favorite Apps"),
+    "btnAddFavContacts": MessageLookupByLibrary.simpleMessage(
+      "Add Favorite Contacts",
+    ),
+    "dlgEditTitle": MessageLookupByLibrary.simpleMessage("Edit Favorites"),
+    "msgNoContactsPermission": MessageLookupByLibrary.simpleMessage(
+      "To add favorite contacts to this screen, allow this app access to your contacts.",
+    ),
+    "msgNoFavourites": MessageLookupByLibrary.simpleMessage(
+      "You haven\'t added any favorites",
+    ),
+  };
 }
