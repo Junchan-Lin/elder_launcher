@@ -4,6 +4,7 @@ import '../constants/channels.dart';
 class NativeMethods {
   final platformCore = const MethodChannel(channelCore);
   final platformContacts = const MethodChannel(channelContacts);
+  final platformWidgets = const MethodChannel(channelWidgets);
 
   /*
   ** Contacts & Call
@@ -45,5 +46,26 @@ class NativeMethods {
     var favAppsInDeprecatedList =
         await platformCore.invokeListMethod<String>('getDeprecatedFavAppIds');
     return favAppsInDeprecatedList ?? <String>[];
+  }
+
+  /*
+  ** Widgets
+  */
+
+  Future<Map<String, dynamic>?> pickAndBindWidget() async {
+    final result =
+        await platformWidgets.invokeMethod<Map>('pickAndBindWidget');
+    return result?.cast<String, dynamic>();
+  }
+
+  void deleteWidget(int appWidgetId) {
+    platformWidgets
+        .invokeMethod('deleteWidget', {'appWidgetId': appWidgetId});
+  }
+
+  Future<List<int>> filterValidWidgetIds(List<int> appWidgetIds) async {
+    final result = await platformWidgets.invokeListMethod<int>(
+        'filterValidWidgetIds', {'appWidgetIds': appWidgetIds});
+    return result ?? appWidgetIds;
   }
 }
