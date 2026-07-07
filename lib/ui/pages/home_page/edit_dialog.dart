@@ -1,4 +1,5 @@
 import 'package:elder_launcher/providers/line_provider.dart';
+import '../../../providers/widget_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,9 +21,12 @@ Future EditDialog(BuildContext context, EditMode editMode) {
   } else if (editMode == EditMode.contacts) {
     addRemoveText = S.of(context).dlgContactsAddRemove;
     reorderText = S.of(context).dlgContactsReorder;
-  } else {
+  } else if (editMode == EditMode.line) {
     addRemoveText = S.of(context).dlgLineAddRemove;
     reorderText = S.of(context).dlgLineReorder;
+  } else {
+    addRemoveText = S.of(context).dlgWidgetsAddRemove;
+    reorderText = S.of(context).dlgWidgetsReorder;
   }
 
   return showCupertinoModalPopup(
@@ -68,8 +72,10 @@ Future EditDialog(BuildContext context, EditMode editMode) {
               {context.read<AppProvider>().reloadLists()}
             else if (editMode == EditMode.contacts)
               {context.read<ContactProvider>().reloadLists()}
-            else
+            else if (editMode == EditMode.line)
               {context.read<LineProvider>().reloadLists()}
+            else
+              {context.read<WidgetProvider>().reloadLists()}
           },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
@@ -78,7 +84,9 @@ Future EditDialog(BuildContext context, EditMode editMode) {
                   ? S.of(context).dlgAppsReload
                   : editMode == EditMode.contacts
                       ? S.of(context).dlgContactsReload
-                      : S.of(context).dlgLineReload,
+                      : editMode == EditMode.line
+                          ? S.of(context).dlgLineReload
+                          : S.of(context).dlgWidgetsReload,
               style: TextStyles.dialogAction,
             ),
           ),

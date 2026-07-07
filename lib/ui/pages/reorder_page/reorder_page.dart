@@ -5,6 +5,7 @@ import '../../../constants/edit_mode.dart';
 import '../../../generated/l10n.dart';
 import '../../../providers/app_provider.dart';
 import '../../../providers/contact_provider.dart';
+import '../../../providers/widget_provider.dart';
 import '../../../models/item.dart';
 import '../../../services/edit_service.dart';
 import '../../../ui/common/info_action_widget.dart';
@@ -25,8 +26,10 @@ class ReorderPage extends StatelessWidget {
       favItems = context.read<AppProvider>().favApps;
     } else if (editMode == EditMode.contacts) {
       favItems = context.read<ContactProvider>().favContacts;
-    } else {
+    } else if (editMode == EditMode.line) {
       favItems = context.read<LineProvider>().favLineContacts;
+    } else {
+      favItems = context.read<WidgetProvider>().favWidgets;
     }
 
     void backToHome() {
@@ -38,8 +41,10 @@ class ReorderPage extends StatelessWidget {
         context.read<AppProvider>().saveFavApps(newFavItems);
       } else if (editMode == EditMode.contacts) {
         context.read<ContactProvider>().saveFavContacts(newFavItems);
-      } else {
+      } else if (editMode == EditMode.line) {
         context.read<LineProvider>().saveFavLineContacts(newFavItems);
+      } else {
+        context.read<WidgetProvider>().saveFavWidgets(newFavItems);
       }
     }
 
@@ -50,7 +55,9 @@ class ReorderPage extends StatelessWidget {
             ? S.of(context).dlgAppsReorder
             : editMode == EditMode.contacts
                 ? S.of(context).dlgContactsReorder
-                : S.of(context).dlgLineReorder,
+                : editMode == EditMode.line
+                    ? S.of(context).dlgLineReorder
+                    : S.of(context).dlgWidgetsReorder,
         body: Consumer<EditService>(builder: (_, editService, __) {
           if (editService.sortedItems.isNotEmpty) {
             return ReorderWidget(editService,
