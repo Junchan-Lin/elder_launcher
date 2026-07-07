@@ -21,7 +21,8 @@ class _HomeTab {
   final Widget header;
   final Widget body;
 
-  const _HomeTab({required this.mode, required this.header, required this.body});
+  const _HomeTab(
+      {required this.mode, required this.header, required this.body});
 }
 
 class HomePage extends StatefulWidget {
@@ -31,20 +32,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  TabController? _controllerPendingDispose;
   int _previousVisibleCount = -1;
 
   @override
   void dispose() {
-    _controllerPendingDispose?.dispose();
     _tabController?.dispose();
     super.dispose();
   }
 
-  Widget _tabHeader(BuildContext context, IconData icon, String label,
-      AutoSizeGroup group) {
+  Widget _tabHeader(
+      BuildContext context, IconData icon, String label, AutoSizeGroup group) {
     return Center(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -135,8 +135,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     if (widgetsVisible) {
       tabs.add(_HomeTab(
         mode: EditMode.widgets,
-        header: _tabHeader(
-            context, Icons.widgets, S.of(context).Widgets, group),
+        header:
+            _tabHeader(context, Icons.widgets, S.of(context).Widgets, group),
         body: const WidgetsTab(),
       ));
     }
@@ -145,16 +145,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   void _syncTabController(int visibleCount) {
-    // 上一輪 build() 若换過 controller，此時該輪的 widget 樹比對
-    // （TabBar/TabBarView 的 didUpdateWidget）已經跑完、監聽器已從舊
-    // controller 解除，這裡才安全 dispose，避免在監聽器還沒解除前
-    // dispose 導致 TabBar 內部存取已釋放的 controller 而崩潰。
-    _controllerPendingDispose?.dispose();
-    _controllerPendingDispose = null;
-
     if (visibleCount == _previousVisibleCount) return;
     _previousVisibleCount = visibleCount;
-    _controllerPendingDispose = _tabController;
+    _tabController?.dispose();
     _tabController =
         TabController(length: visibleCount, vsync: this, initialIndex: 0);
   }
@@ -188,8 +181,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
                         child: IconButton(
                           icon: const Icon(Icons.edit),
-                          onPressed: () =>
-                              openEditDialog(tabController.index),
+                          onPressed: () => openEditDialog(tabController.index),
                         ),
                       ),
                     GestureDetector(
@@ -198,9 +190,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Icon(
-                          lockProvider.isLocked
-                              ? Icons.lock
-                              : Icons.lock_open,
+                          lockProvider.isLocked ? Icons.lock : Icons.lock_open,
                         ),
                       ),
                     ),
