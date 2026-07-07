@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:elder_launcher/constants/channels.dart';
 import 'package:elder_launcher/constants/keys.dart';
 import 'package:elder_launcher/data_sources/widget_repository.dart';
